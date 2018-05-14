@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+.app-bar {
+  width: 100%;
+  color: #fff;
+  background-color: #f00;
+  padding: 1rem;
+}
