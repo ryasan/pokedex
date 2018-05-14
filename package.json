@@ -1,0 +1,42 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "pokemon lookup app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon ./server",
+    "client": "webpack -w --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryasan86/pokedex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryasan86/pokedex/issues"
+  },
+  "homepage": "https://github.com/ryasan86/pokedex#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "concurrently": "^3.5.1",
+    "css-loader": "^0.28.11",
+    "morgan": "^1.9.0",
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.4",
+    "sass-loader": "^7.0.1",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}
