@@ -7,6 +7,7 @@ const fs = require('fs');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const router = require('./routes');
 const port = process.env.PORT || 1128;
 
 app.use(logger('dev'));
@@ -19,5 +20,6 @@ app.use((req, res, next) => {
   res.setHeader('Expires', '0');
   next();
 });
+app.use(router);
 
 http.listen(port, () => console.log(`server is listening on port: ${port}`));
