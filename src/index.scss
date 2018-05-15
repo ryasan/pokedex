@@ -11,7 +11,24 @@ body {
 
 .app-bar {
   width: 100%;
-  color: #fff;
   background-color: #f00;
-  padding: 1rem;
+  padding: 0.5rem;
+  line-height: 1rem;
+  display: table;
+  .nav-item {
+    vertical-align: middle;
+    display: table-cell;
+    &.title {
+      color: #fff;
+      text-align: center;
+      padding-right: 15%;
+      em {
+        color: black;
+      }
+    }
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
 }
