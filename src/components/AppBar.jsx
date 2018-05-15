@@ -6,7 +6,7 @@ export default class AppBar extends Component {
     return (
       <div className="app-bar">
         <li className="nav-item">
-          <img src={brand} alt="poke" />
+          <img src={brand} className="brand" alt="poke" />
         </li>
         <li className="nav-item title">
           <h2>
