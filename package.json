@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:all": "concurrently \"yarn server\" \"yarn client\"",
     "server": "nodemon ./server -e js",
-    "client": "webpack -w --mode development"
+    "client": "webpack -w --mode development",
+    "build": "webpack --mode production",
+    "db:setup": "babel-node ./server/config/dbsetup.js"
   },
   "repository": {
     "type": "git",
@@ -20,12 +22,17 @@
   },
   "homepage": "https://github.com/ryasan86/pokedex#readme",
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
+    "pg": "^7.4.3",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",

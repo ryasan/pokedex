@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
-import AppBar from './components/AppBar';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { storePokemon } from './store';
+import { client } from './client';
 
-export default class App extends Component {
+import AppBar from './components/AppBar';
+import PokemonList from './components/PokemonList';
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      pokemon: []
+    };
+  }
+
   componentDidMount() {
-    fetch('/api/pokemon', { headers: { Accept: 'application/json' } }).then(res => {
-      console.log(res.json());
+    client.getPokemon(data => {
+      this.setState({
+        pokemon: data
+      });
+      this.props.storePokemon(data);
     });
   }
 
@@ -12,8 +28,22 @@ export default class App extends Component {
     return (
       <div>
         <AppBar />
-        <div className="main-content">Main Content</div>
+        <div className="main-content">
+          <PokemonList pokemon={this.state.pokemon} />
+        </div>
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    pokemon: state.pokemon
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ storePokemon }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
