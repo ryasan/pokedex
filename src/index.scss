@@ -43,3 +43,26 @@ body {
     }
   }
 }
+
+.container {
+  margin: 0 0 0 10rem;
+  text-align: center;
+  .card {
+    border: black 1px solid;
+    width: 20rem;
+    height: 20rem;
+    float: left;
+    margin: 5px;
+    text-align: center;
+    img {
+      max-width: 12rem;
+      max-height: 12rem;
+    }
+  }
+
+  @media only screen and (max-width: 400px) {
+    .container {
+      margin: 0;
+    }
+  }
+}
