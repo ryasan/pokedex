@@ -1,13 +1,13 @@
-const express = require('express');
-const path = require('path');
-const logger = require('morgan');
+const express    = require('express');
+const path       = require('path');
+const logger     = require('morgan');
 const bodyParser = require('body-parser');
-const fs = require('fs');
+const fs         = require('fs');
 
-const app = express();
-const http = require('http').Server(app);
+const app    = express();
+const http   = require('http').Server(app);
 const router = require('./routes');
-const port = process.env.PORT || 1128;
+const port   = process.env.PORT || 1128;
 // middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
