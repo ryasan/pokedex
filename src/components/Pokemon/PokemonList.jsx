@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PokemonListItem from './PokemonListItem';
 
 export default class PokemonList extends Component {

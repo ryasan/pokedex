@@ -1,6 +1,5 @@
-$primary: #f00;
-$secondary: #337ab7;
-$white: #fff;
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:700');
+@import './_variables.scss';
 
 * {
   box-sizing: border-box;
@@ -46,14 +45,47 @@ body {
   }
 }
 
+.container {
+  display: grid;
+  grid-template-columns: 1fr 9fr;
+  font-family: 'PT Sans', sans-serif;
+}
+
 .main-content {
   display: grid;
 }
 
+.category-form {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin-bottom: 12px;
+  margin-left: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    border: $secondary 2px solid;
+    border-radius: 0.3rem;
+  }
+}
+
 .pokemon-list {
-  margin: 0 0 0 10rem;
   text-align: center;
   .card {
+    padding-top: 1rem;
     border: #c7c6c6 1px solid;
     box-shadow: 4px 5px 6px 0 #444444;
     border-radius: 0.5rem;
