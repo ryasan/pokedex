@@ -9,9 +9,9 @@ const getPaginatedItems = (items, offset) => {
 
 module.exports = {
   getPokemon: (req, res) => {
-
+    console.log(req.query);
     const pokemon        = JSON.parse(fs.readFileSync(DATA_FILE));
-    const offset         = req.query.offset ? parseInt(req.query.offset, 12) : 0;
+    const offset         = req.query.offset ? parseInt(req.query.offset, 10) : 0;
     const nextOffSet     = offset + PER_PAGE;
     const previousOffSet = offset - PER_PAGE < 1 ? 0 : offset - PER_PAGE;
 
@@ -31,3 +31,4 @@ module.exports = {
     res.json(json);
   }
 };
+

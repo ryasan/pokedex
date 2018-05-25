@@ -44,13 +44,13 @@ body {
   }
 }
 
-.container {
+.pokemon-list {
   margin: 0 0 0 10rem;
   text-align: center;
   .card {
     border: black 1px solid;
-    width: 20rem;
-    height: 20rem;
+    width: 16rem;
+    height: 16rem;
     float: left;
     margin: 5px;
     text-align: center;
@@ -67,6 +67,8 @@ body {
   }
 }
 
+
+
 .pagination {
   li {
     a,
@@ -79,15 +81,16 @@ body {
       margin-left: -1px;
       line-height: 1.42857143;
       text-decoration: none;
-      background-color: #fff;
+      // background-color: #fff;
       border: 1px solid #ddd;
     }
   }
   li {
     display: inline-block;
-    // &.active {
-    //   background-color: #337ab7 !important;
-    //   color: #fff !important;
-    // }
+    &.active {
+      background-color: #337ab7 !important;
+      color: #fff !important;
+    }
   }
 }
+

@@ -8,7 +8,7 @@ export default class PokemonList extends Component {
     ));
 
     return (
-      <div className="container" align="center">
+      <div className="pokemon-list" align="center">
         {pokemon}
       </div>
     );
