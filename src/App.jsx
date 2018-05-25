@@ -46,20 +46,20 @@ class App extends Component {
     return (
       <Fragment>
         <AppBar />
-        <div className="main-content">
+        <div className='main-content'>
           <PokemonList pokemon={this.state.pokemon} />
           <ReactPaginate
             previousLabel="previous"
             nextLabel="next"
-            breakLabel={<a href="">...</a>}
-            breakClassName="break-me"
+            breakLabel={<a href=''>...</a>}
+            breakClassName='break-me'
             pageCount={this.state.pageCount}
             marginPagesDisplayed={2}
             pageRangeDisplayed={5}
             onPageChange={data => this.handlePageClick(data)}
-            containerClassName={'pagination'}
-            subContainerClassName={'pages pagination'}
-            activeClassName={'active'}
+            containerClassName="pagination"
+            subContainerClassName="pages pagination"
+            activeClassName="active"
           />
         </div>
       </Fragment>
