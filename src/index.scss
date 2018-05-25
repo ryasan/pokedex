@@ -1,4 +1,6 @@
 $primary: #f00;
+$secondary: #337ab7;
+$white: #fff;
 
 * {
   box-sizing: border-box;
@@ -23,7 +25,7 @@ body {
     vertical-align: middle;
     display: table-cell;
     &.title {
-      color: #fff;
+      color: $white;
       text-align: center;
       padding-right: 15%;
     }
@@ -52,7 +54,9 @@ body {
   margin: 0 0 0 10rem;
   text-align: center;
   .card {
-    border: black 1px solid;
+    border: #c7c6c6 1px solid;
+    box-shadow: 4px 5px 6px 0 #444444;
+    border-radius: 0.5rem;
     width: 16rem;
     height: 16rem;
     float: left;
@@ -88,16 +92,16 @@ body {
   li {
     display: inline-block;
     &.active {
-      background-color: #337ab7;
-      color: #fff;
+      background-color: $secondary;
+      color: $white;
     }
     &.previous {
-      color: #337ab7;
-      background-color: #fff;
+      color: $secondary;
+      background-color: $white;
     }
     &.next {
-      color: #337ab7;
-      background-color: #fff;
+      color: $secondary;
+      background-color: $white;
     }
   }
 }
