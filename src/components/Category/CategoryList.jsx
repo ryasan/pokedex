@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { selectCategories } from './../../store';
 import CategoryListItem from './CategoryListItem';
-import './Category.scss'
+import './Category.scss';
 
 const categories = [
   'Grass',
@@ -20,11 +23,40 @@ const categories = [
   'Dragon'
 ];
 
-export default class CategoryList extends Component {
+class CategoryList extends Component {
+  handleCheckBoxClick(title, isChecked) {
+    const { categories } = this.props;
+    const index = categories.indexOf(title);
+    isChecked ? categories.push(title) : categories.splice(index, 1);
+    this.props.onFilterCategory(categories);
+  }
+
   render() {
     const categoryList = categories.map((title, i) => (
-      <CategoryListItem key={i} title={title} />
+      <CategoryListItem
+        key={i}
+        title={title}
+        onCheckBoxClick={this.handleCheckBoxClick.bind(this)}
+      />
     ));
-    return <div>{categoryList}</div>;
+
+    return (
+      <div className="category-container">
+        <h3>Category</h3>
+        {categoryList}
+      </div>
+    );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    categories: state.categories
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ selectCategories }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);

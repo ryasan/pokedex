@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import ReactPaginate from 'react-paginate';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { storePokemon } from './store';
+import { store } from './store';
 import { client } from './client';
 import './App.scss';
 import AppBar from './components/Globals/AppBar';
@@ -14,8 +14,9 @@ class App extends Component {
     super(props);
     this.state = {
       pokemon: [],
-      offset: 0,
-      selectedCategories: []
+      categories: [],
+      perPage: 12,
+      offset: 0
     };
   }
 
@@ -24,9 +25,12 @@ class App extends Component {
   }
 
   loadPokemonFromServer() {
+    const { perPage, offset, categories } = this.state;
+
     const query = {
-      limit: this.props.perPage,
-      offset: this.state.offset
+      limit: perPage,
+      offset,
+      categories
     };
 
     client.getAllPokemon(data => {
@@ -34,18 +38,17 @@ class App extends Component {
         pokemon: data.pokemon,
         pageCount: Math.ceil(data.meta.total_count / data.meta.limit)
       });
-      this.props.storePokemon(data);
     }, query);
   }
 
   handlePageClick(data) {
     const selected = data.selected;
-    const offset = Math.ceil(selected * this.props.perPage);
+    const offset = Math.ceil(selected * this.state.perPage);
     this.setState({ offset: offset }, () => this.loadPokemonFromServer());
   }
 
-  handleFilterCategory() {
-    console.log('filter category');
+  handleFilterClick(categories) {
+    this.setState({ categories }, () => this.loadPokemonFromServer());
   }
 
   render() {
@@ -53,7 +56,7 @@ class App extends Component {
       <Fragment>
         <AppBar />
         <div className="container">
-          <CategoryList onFilterCategory={this.handleFilterCategory} />
+          <CategoryList onFilterCategory={this.handleFilterClick.bind(this)} />
           <div className="main-content">
             <PokemonList pokemon={this.state.pokemon} />
             <ReactPaginate
@@ -78,12 +81,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    pokemon: state.pokemon
+    categories: state.categories
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ storePokemon }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

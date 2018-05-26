@@ -7,7 +7,7 @@ import App from './App';
 
 const AppWithStore = (
   <Provider store={store}>
-    <App perPage={12} />
+    <App />
   </Provider>
 );
 

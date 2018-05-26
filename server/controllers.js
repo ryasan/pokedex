@@ -10,10 +10,13 @@ const getPaginatedItems = (items, offset) => {
 module.exports = {
   getPokemon: (req, res) => {
 
-    const pokemon        = JSON.parse(fs.readFileSync(DATA_FILE));
+    let   pokemon        = JSON.parse(fs.readFileSync(DATA_FILE));
+    const categories     = req.query.categories.split(',');
     const offset         = req.query.offset ? parseInt(req.query.offset, 10) : 0;
     const nextOffSet     = offset + PER_PAGE;
     const previousOffSet = offset - PER_PAGE < 1 ? 0 : offset - PER_PAGE;
+
+    categories[0] ? pokemon = filtered(pokemon, categories) : undefined;
 
     const meta = {
       limit      : PER_PAGE,
@@ -32,3 +35,10 @@ module.exports = {
   }
 };
 
+const filtered = (pokemon, categories) => {
+  return pokemon.filter(p => {
+    return categories.some(category => {
+      return p.types.indexOf(category) !== -1;
+    });
+  });
+};

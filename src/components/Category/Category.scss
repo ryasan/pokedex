@@ -1,5 +1,11 @@
 @import './../../_variables.scss';
 
+.category-container {
+  h3 {
+    margin-left: 0.5rem;
+  }
+}
+
 .category-form {
   display: block;
   position: relative;

@@ -7,6 +7,14 @@ const storePokemon = pokemon => {
     payload: pokemon
   };
 };
+
+const selectCategories = pokemon => {
+  return {
+    type: 'FILTERED_POKEMON',
+    payload: pokemon
+  };
+};
+
 // reducers
 const storePokemonReducer = (state = [], action) => {
   switch (action.type) {
@@ -17,10 +25,38 @@ const storePokemonReducer = (state = [], action) => {
   }
 };
 
+// let categories = {
+//   Grass: false,
+//   Poison: false,
+//   Fire: false,
+//   Flying: false,
+//   Water: false,
+//   Bug: false,
+//   Normal: false,
+//   Electric: false,
+//   Ground: false,
+//   Fighting: false,
+//   Psychic: false,
+//   Rock: false,
+//   Ice: false,
+//   Ghost: false,
+//   Dragon: false
+// };
+
+const selectCategoriesReducer = (state = [], action) => {
+  switch (action.type) {
+    case 'FILTERED_POKEMON':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
 const allReducers = combineReducers({
-  pokemon: storePokemonReducer
+  pokemon: storePokemonReducer,
+  categories: selectCategoriesReducer
 });
 
 const store = createStore(allReducers);
 
-export { store, storePokemon };
+export { store, storePokemon, selectCategories };

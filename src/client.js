@@ -1,9 +1,12 @@
 module.exports = {
   client: {
     getAllPokemon: (success, query) => {
-      fetch(`/api/pokemon?limit=${query.limit}&offset=${query.offset}`, {
-        headers: { Accept: 'application/json' }
-      })
+      fetch(
+        `/api/pokemon?limit=${query.limit}&offset=${query.offset}&categories=${query.categories}`,
+        {
+          headers: { Accept: 'application/json' }
+        }
+      )
         .then(checkStatus)
         .then(parseJSON)
         .then(success);
