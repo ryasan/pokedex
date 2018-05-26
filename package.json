@@ -8,8 +8,7 @@
     "start:all": "concurrently \"yarn server\" \"yarn client\"",
     "server": "nodemon ./server -e js",
     "client": "webpack -w --mode development",
-    "build": "webpack --mode production",
-    "db:setup": "babel-node ./server/config/dbsetup.js"
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",

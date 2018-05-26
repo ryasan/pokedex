@@ -1,15 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import ReactPaginate from 'react-paginate';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { store } from './store';
 import { client } from './client';
 import './App.scss';
 import AppBar from './components/Globals/AppBar';
 import CategoryList from './components/Category/CategoryList';
 import PokemonList from './components/Pokemon/PokemonList';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -78,11 +75,3 @@ class App extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    categories: state.categories
-  };
-};
-
-export default connect(mapStateToProps)(App);

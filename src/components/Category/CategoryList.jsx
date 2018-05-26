@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { selectCategories } from './../../store';
 import CategoryListItem from './CategoryListItem';
 import './Category.scss';
 
@@ -23,7 +20,7 @@ const categories = [
   'Dragon'
 ];
 
-class CategoryList extends Component {
+export default class CategoryList extends Component {
   handleCheckBoxClick(title, isChecked) {
     const { categories } = this.props;
     const index = categories.indexOf(title);
@@ -48,15 +45,3 @@ class CategoryList extends Component {
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    categories: state.categories
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ selectCategories }, dispatch);
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CategoryList);
