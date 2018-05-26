@@ -1,0 +1,42 @@
+@import './_variables.scss';
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+    font-family: 'PT Sans', sans-serif;
+  }
+  
+  .main-content {
+    display: grid;
+  }
+  
+  .pagination {
+    text-align: center;
+    li {
+      a {
+        cursor: default;
+        position: relative;
+        float: left;
+        padding: 6px 12px;
+        margin-left: -1px;
+        line-height: 1.42857143;
+        text-decoration: none;
+        border: 1px solid #ddd;
+      }
+    }
+    li {
+      display: inline-block;
+      &.active {
+        background-color: $secondary;
+        color: $white;
+      }
+      &.previous {
+        color: $secondary;
+        background-color: $white;
+      }
+      &.next {
+        color: $secondary;
+        background-color: $white;
+      }
+    }
+  }

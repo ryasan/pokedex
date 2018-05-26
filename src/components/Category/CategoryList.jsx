@@ -1,5 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import CategoryListItem from './CategoryListItem';
+import './Category.scss'
 
 const categories = [
   'Grass',

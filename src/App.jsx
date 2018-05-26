@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { storePokemon } from './store';
 import { client } from './client';
+import './App.scss';
 import AppBar from './components/Globals/AppBar';
 import CategoryList from './components/Category/CategoryList';
 import PokemonList from './components/Pokemon/PokemonList';

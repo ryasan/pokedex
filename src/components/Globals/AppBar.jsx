@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import brand from './../../images/pokeball.svg';
+import './AppBar.scss';
 
 export default class AppBar extends Component {
   render() {
