@@ -21,14 +21,22 @@ const categories = [
 ];
 
 export default class CategoryList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      filteredCategories: []
+    };
+  }
+
   handleCheckBoxClick(title, isChecked) {
-    const { categories } = this.props;
-    const index = categories.indexOf(title);
-    isChecked ? categories.push(title) : categories.splice(index, 1);
-    this.props.onFilterCategory(categories);
+    const { filteredCategories } = this.state;
+    const index = filteredCategories.indexOf(title);
+    isChecked ? filteredCategories.push(title) : filteredCategories.splice(index, 1);
+    this.props.onFilterCategory(filteredCategories);
   }
 
   render() {
+
     const categoryList = categories.map((title, i) => (
       <CategoryListItem
         key={i}

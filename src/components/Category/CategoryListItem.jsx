@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 
 export default class CategoryListItem extends Component {
   render() {
+
     const { title, onCheckBoxClick } = this.props;
 
     return (
