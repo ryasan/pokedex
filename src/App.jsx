@@ -13,7 +13,7 @@ export default class App extends Component {
       pokemon: [],
       categories: [],
       perPage: 12,
-      offset: 0
+      offset: 0,
     };
   }
 
@@ -45,7 +45,7 @@ export default class App extends Component {
   }
 
   handleFilterClick(categories) {
-    this.setState({ categories }, () => this.loadPokemonFromServer());
+    this.setState({ categories}, () => this.loadPokemonFromServer());
   }
 
   render() {
@@ -56,19 +56,20 @@ export default class App extends Component {
           <CategoryList onFilterCategory={this.handleFilterClick.bind(this)} />
           <div className="main-content">
             <PokemonList pokemon={this.state.pokemon} />
-            <ReactPaginate
-              previousLabel="previous"
-              nextLabel="next"
-              breakLabel={<a href="">...</a>}
-              breakClassName="break-me"
-              pageCount={this.state.pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={data => this.handlePageClick(data)}
-              containerClassName="pagination"
-              subContainerClassName="pages pagination"
-              activeClassName="active"
-            />
+            <ReactPaginate  previousLabel="previous"
+                            previousLinkClassName="previous-link"
+                            nextLabel="next"
+                            nextLinkClassName="next-link"
+                            breakLabel={<a href="">...</a>}
+                            breakClassName="break-me"
+                            pageCount={this.state.pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={data => this.handlePageClick(data)}
+                            containerClassName="pagination"
+                            pageClassName="page"
+                            subContainerClassName="pages pagination"
+                            activeClassName="active" />
           </div>
         </div>
       </Fragment>

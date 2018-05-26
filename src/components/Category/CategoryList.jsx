@@ -38,12 +38,9 @@ export default class CategoryList extends Component {
   render() {
 
     const categoryList = categories.map((title, i) => (
-      <CategoryListItem
-        key={i}
-        title={title}
-        onCheckBoxClick={this.handleCheckBoxClick.bind(this)}
-      />
-    ));
+      <CategoryListItem key={i}
+                        title={title}
+                        onCheckBoxClick={this.handleCheckBoxClick.bind(this)} /> ));
 
     return (
       <div className="category-container">
