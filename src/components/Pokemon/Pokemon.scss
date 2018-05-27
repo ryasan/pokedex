@@ -9,44 +9,11 @@
     width: 16rem;
     height: 16rem;
     float: left;
-    margin: 5px;
-    text-align: center;
-    // .image-container {
-    //   border:
-    // }
-    &.grass,
-    &.bug {
-      background-color: #27ae60;
-    }
-    &.fire {
-      background-color: #e74c3c;
-    }
-    &.water,
-    &.ice {
-      background-color: #3498db;
-    }
-    &.electric {
-      background-color: #f7dc6f;
-    }
-    &.psychic,
-    &.ghost,
-    &.poison {
-      background-color: #9b59b6;
-    }
-    &.fighting,
-    &.rock,
-    &.ground {
-      background-color: #9c640c;
-    }
-    &.steel {
-      background-color: #c0c0c0;
-    }
-    &.dragon {
-      background-color: #f5b041;
-    }
-    &.normal {
-      background-color: #ccd1d1;
-    }
+    margin: 0.8rem 0.5rem;
+    // text-align: center;
+
+    animation:float 1.3s ease-in-out infinite;
+
     img {
       border-radius: 0.5rem;
       padding: 1rem;
@@ -61,4 +28,38 @@
       margin: 0;
     }
   }
+}
+
+.grass,
+.bug {
+  background-color: #27ae60;
+}
+.fire {
+  background-color: #e74c3c;
+}
+.water,
+.ice {
+  background-color: #3498db;
+}
+.electric {
+  background-color: #f7dc6f;
+}
+.psychic,
+.ghost,
+.poison {
+  background-color: #9b59b6;
+}
+.fighting,
+.rock,
+.ground {
+  background-color: #9c640c;
+}
+.steel {
+  background-color: #c0c0c0;
+}
+.dragon {
+  background-color: #f5b041;
+}
+.normal {
+  background-color: #ccd1d1;
 }

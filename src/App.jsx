@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import ReactPaginate from 'react-paginate';
-import { client } from './client';
 import './App.scss';
-import AppBar from './components/Globals/AppBar';
+import { client } from './client';
 import CategoryList from './components/Category/CategoryList';
-import PokemonList from './components/Pokemon/PokemonList';
+import MainContent from './components/MainContent/MainContent';
+import AppBar from './components/Ui/AppBar';
+import Loader from './components/Ui/Loader';
 
 export default class App extends Component {
   constructor(props) {
@@ -14,11 +14,13 @@ export default class App extends Component {
       categories: [],
       perPage: 12,
       offset: 0,
+      loading: false
     };
   }
 
   componentDidMount() {
-    this.loadPokemonFromServer();
+    this.setState({ loading: true });
+    setTimeout(() => this.loadPokemonFromServer(), 1000);
   }
 
   loadPokemonFromServer() {
@@ -33,7 +35,8 @@ export default class App extends Component {
     client.getAllPokemon(data => {
       this.setState({
         pokemon: data.pokemon,
-        pageCount: Math.ceil(data.meta.total_count / data.meta.limit)
+        pageCount: Math.ceil(data.meta.total_count / data.meta.limit),
+        loading: false
       });
     }, query);
   }
@@ -45,32 +48,26 @@ export default class App extends Component {
   }
 
   handleFilterClick(categories) {
-    this.setState({ categories}, () => this.loadPokemonFromServer());
+    this.setState({ categories }, () => this.loadPokemonFromServer());
   }
 
   render() {
+    const { pokemon, pageCount } = this.state;
+    const mainContent = (
+      <MainContent
+        pokemon={pokemon}
+        pageCount={pageCount}
+        onPageClick={this.handlePageClick.bind(this)}
+      />
+    );
+    const loader = <Loader />;
+
     return (
       <Fragment>
         <AppBar />
         <div className="container">
           <CategoryList onFilterCategory={this.handleFilterClick.bind(this)} />
-          <div className="main-content">
-            <PokemonList pokemon={this.state.pokemon} />
-            <ReactPaginate  previousLabel="previous"
-                            previousLinkClassName="previous-link"
-                            nextLabel="next"
-                            nextLinkClassName="next-link"
-                            breakLabel={<a href="">...</a>}
-                            breakClassName="break-me"
-                            pageCount={this.state.pageCount}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={data => this.handlePageClick(data)}
-                            containerClassName="pagination"
-                            pageClassName="page"
-                            subContainerClassName="pages pagination"
-                            activeClassName="active" />
-          </div>
+          {this.state.loading ? loader : mainContent}
         </div>
       </Fragment>
     );
