@@ -1,34 +1,47 @@
 @import './../../_variables.scss';
 
 .pokemon-list {
-  filter: drop-shadow(25px 25px 10px gray);
+  filter: drop-shadow(25px 25px 10px rgb(150, 148, 148));
   .card {
     position: relative;
+    margin: 1rem 0.6rem;
     display: inline-block;
-    $width-normal: 12rem;
-    width: $width-normal;
+    width: $width_normal;
     height: auto;
     padding: 2% 0;
-    // height: calc(1.0 * #{$width-normal});
+    height: calc(1.4 * #{$width_normal});
     border-radius: 0.5rem;
-    // transform-style: preserve-3d;
-    -webkit-transform-style: preserve-3d;
-    margin: 1rem 0.6rem;
-    transition: transform 0.3s ease-out;
-    transform: rotateY(0deg);
-
     img {
-      border-radius: 0.5rem;
-      padding: 1rem;
-      background-color: $white;
+      display: block;
+      position: relative;
+      top: 2rem;
+      left: 0;
       width: 80%;
       height: auto;
+      border-radius: 3%;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: width 0.2s ease-out, height 0.2s ease-out, top 0.2s ease-out,
+        left 0.2s ease-out;
     }
+
     &:hover {
       animation: none;
       z-index: 100;
-      // $width_large: 300px;
-      // width: $width_large;
+
+      img {
+        $width-large: 300px;
+        width: $width-large;
+        height: calc(1.4 * #{$width-large});
+        position: relative;
+        top: calc(
+          (-1 * (1.4 * #{$width-large}) / 2) + ((1.4 * #{$width_normal}) / 2)
+        );
+        left: calc((-1 * #{$width-large} / 2) + (#{$width_normal} / 2));
+      }
     }
   }
 }
@@ -62,50 +75,4 @@
   100% {
     transform: rotateZ(360deg);
   }
-}
-
-.cards-container {
-  margin: 0 auto;
-  max-width: 1000px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  align-items: top;
-  padding: 30px 100px;
-  filter: drop-shadow(25px 25px 10px grey);
-}
-
-.grass,
-.bug {
-  background-color: #27ae60;
-}
-.fire {
-  background-color: #e74c3c;
-}
-.water,
-.ice {
-  background-color: #3498db;
-}
-.electric {
-  background-color: #f7dc6f;
-}
-.psychic,
-.ghost,
-.poison {
-  background-color: #9b59b6;
-}
-.fighting,
-.rock,
-.ground {
-  background-color: #9c640c;
-}
-.steel {
-  background-color: #c0c0c0;
-}
-.dragon {
-  background-color: #f5b041;
-}
-.normal {
-  background-color: #ccd1d1;
 }

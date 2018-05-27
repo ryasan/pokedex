@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import PokemonList from './../Pokemon/PokemonList';
+import './MainContent.scss'
 
 export default class MainContent extends Component {
   render() {

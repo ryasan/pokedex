@@ -7,10 +7,12 @@ export default class PokemonListItem extends Component {
     const category = p.types[0].toLowerCase();
 
     return (
-      <div className={`card ${category}`}>
-        <div>{p.name}</div>
-        <img src={p.imageUrl} alt={`img-${p.name}`} />
-      </div>
+      <a className="card">
+        <div className="inner">
+          {p.name}
+          <img src={p.imageUrl} alt={`img-${p.name}`} />
+        </div>
+      </a>
     );
   }
 }
