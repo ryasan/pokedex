@@ -20,7 +20,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.setState({ loading: true });
-    setTimeout(() => this.loadPokemonFromServer(), 1000);
+    setTimeout(() => this.loadPokemonFromServer(), 500);
   }
 
   loadPokemonFromServer() {
