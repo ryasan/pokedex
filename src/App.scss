@@ -28,20 +28,9 @@
         color: $white;
       }
     }
-    &.page {
-      &:hover {
-        background-color: lighten($secondary, 40%);
-      }
-    }
+    &.page,
+    &.next,
     &.previous {
-      &:hover {
-        background-color: lighten($secondary, 40%);
-      }
-      &.disabled {
-        background-color: $white;
-      }
-    }
-    &.next {
       &:hover {
         background-color: lighten($secondary, 40%);
       }

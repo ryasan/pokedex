@@ -1,16 +1,56 @@
+@import './../../_variables.scss';
+
 .pokemon-list {
   text-align: center;
   .card {
     padding-top: 1rem;
-    border: #c7c6c6 1px solid;
-    box-shadow: 4px 5px 6px 0 #444444;
     border-radius: 0.5rem;
+    box-shadow: 4px 5px 6px 0 #444444;
     width: 16rem;
     height: 16rem;
     float: left;
     margin: 5px;
     text-align: center;
+    // .image-container {
+    //   border:
+    // }
+    &.grass,
+    &.bug {
+      background-color: #27ae60;
+    }
+    &.fire {
+      background-color: #e74c3c;
+    }
+    &.water,
+    &.ice {
+      background-color: #3498db;
+    }
+    &.electric {
+      background-color: #f7dc6f;
+    }
+    &.psychic,
+    &.ghost,
+    &.poison {
+      background-color: #9b59b6;
+    }
+    &.fighting,
+    &.rock,
+    &.ground {
+      background-color: #9c640c;
+    }
+    &.steel {
+      background-color: #c0c0c0;
+    }
+    &.dragon {
+      background-color: #f5b041;
+    }
+    &.normal {
+      background-color: #ccd1d1;
+    }
     img {
+      border-radius: 0.5rem;
+      padding: 1rem;
+      background-color: $white;
       max-width: 12rem;
       max-height: 12rem;
     }

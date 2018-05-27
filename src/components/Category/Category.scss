@@ -18,7 +18,7 @@
   -ms-user-select: none;
   user-select: none;
   &:hover input ~ .checkmark {
-    background-color: #ccc;
+    background-color: lighten($secondary, 40%);
   }
   input {
     position: absolute;
