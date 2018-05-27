@@ -3,12 +3,12 @@
 .pokemon-list {
   text-align: center;
   .card {
+    display: inline-block;
     padding-top: 1rem;
     border-radius: 0.5rem;
     box-shadow: 4px 5px 6px 0 #444444;
     width: 16rem;
     height: 16rem;
-    float: left;
     margin: 0.8rem 0.5rem;
     // text-align: center;
 
