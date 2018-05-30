@@ -32,7 +32,7 @@ export default class CategoryList extends Component {
     const { filteredCategories } = this.state;
     const index = filteredCategories.indexOf(title);
     isChecked ? filteredCategories.push(title) : filteredCategories.splice(index, 1);
-    this.props.onFilterCategory(filteredCategories);
+    this.props.onFilterClick(filteredCategories);
   }
 
   render() {

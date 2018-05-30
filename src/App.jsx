@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import './App.scss';
 import { client } from './client';
-import CategoryList from './components/Category/CategoryList';
-import MainContent from './components/MainContent/MainContent';
-import AppBar from './components/Ui/AppBar';
-import Loader from './components/Ui/Loader';
+import AppBar from './components/AppBar/AppBar';
+import Loader from './components/Loader/Loader';
+import HomePage from './pages/Home';
+import PokemonDetailsPage from './pages/PokemonDetails';
 
 export default class App extends Component {
   constructor(props) {
@@ -19,19 +20,16 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({ loading: true });
-    setTimeout(() => this.loadPokemonFromServer(), 500);
+    this.setState({ loading: true }, () => this.loadPokemonFromServer());
   }
 
   loadPokemonFromServer() {
     const { perPage, offset, categories } = this.state;
-
     const query = {
       limit: perPage,
       offset,
       categories
     };
-
     client.getAllPokemon(data => {
       this.setState({
         pokemon: data.pokemon,
@@ -44,31 +42,51 @@ export default class App extends Component {
   handlePageClick(data) {
     const selected = data.selected;
     const offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ offset: offset }, () => this.loadPokemonFromServer());
+    this.setState({ offset: offset, loading: true }, () =>
+      this.loadPokemonFromServer()
+    );
   }
 
   handleFilterClick(categories) {
-    this.setState({ categories }, () => this.loadPokemonFromServer());
+    this.setState({ categories, loading: true }, () =>
+      this.loadPokemonFromServer()
+    );
   }
 
   render() {
-    const { pokemon, pageCount } = this.state;
-    const mainContent = (
-      <MainContent
-        pokemon={pokemon}
-        pageCount={pageCount}
-        onPageClick={this.handlePageClick.bind(this)}
+    const { pokemon, pageCount, perPage } = this.state;
+    // const loader = <Loader />;
+
+    const HomeRoute = (
+      <Route
+        exact
+        path="/"
+        render={props => (
+          <HomePage
+            {...props}
+            pokemon={pokemon}
+            pageCount={pageCount}
+            perPage={perPage}
+            onPageClick={this.handlePageClick.bind(this)}
+            onFilterClick={this.handleFilterClick.bind(this)}
+          />
+        )}
       />
     );
-    const loader = <Loader />;
+
+    const PokemonDetailsRoute = (
+      <Route path="/details" component={PokemonDetailsPage} />
+    );
 
     return (
       <Fragment>
         <AppBar />
-        <div className="container">
-          <CategoryList onFilterCategory={this.handleFilterClick.bind(this)} />
-          {this.state.loading ? loader : mainContent}
-        </div>
+        <BrowserRouter>
+          <div className="container">
+            {HomeRoute}
+            {PokemonDetailsRoute}
+          </div>
+        </BrowserRouter>
       </Fragment>
     );
   }

@@ -5,19 +5,21 @@ import './MainContent.scss'
 
 export default class MainContent extends Component {
   render() {
+    const { pokemon, pageCount, onPageClick } = this.props;
+
     return (
       <div className="main-content">
-        <PokemonList pokemon={this.props.pokemon} />
+        <PokemonList pokemon={pokemon} />
         <ReactPaginate previousLabel="previous"
                        previousLinkClassName="previous-link"
                        nextLabel="next"
                        nextLinkClassName="next-link"
                        breakLabel={<a href="">...</a>}
                        breakClassName="break-me"
-                       pageCount={this.props.pageCount}
+                       pageCount={pageCount}
                        marginPagesDisplayed={2}
                        pageRangeDisplayed={5}
-                       onPageChange={data => this.props.onPageClick(data)}
+                       onPageChange={data => onPageClick(data)}
                        containerClassName="pagination"
                        pageClassName="page"
                        subContainerClassName="pages pagination"
