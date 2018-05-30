@@ -6,10 +6,11 @@ import AppBar from './components/AppBar/AppBar';
 import Loader from './components/Loader/Loader';
 import HomePage from './pages/Home';
 import PokemonDetailsPage from './pages/PokemonDetails';
+import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       pokemon: [],
       categories: [],
@@ -54,9 +55,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { pokemon, pageCount, perPage } = this.state;
-    // const loader = <Loader />;
-
+    const { pokemon, pageCount, perPage, loading } = this.state;
     const HomeRoute = (
       <Route
         exact
@@ -78,11 +77,16 @@ export default class App extends Component {
       <Route path="/details" component={PokemonDetailsPage} />
     );
 
+    const BreadCrumbsRoute = (
+      <Route render={props => <BreadCrumbs {...props} />} />
+    );
+
     return (
       <Fragment>
         <AppBar />
         <BrowserRouter>
           <div className="container">
+            {BreadCrumbsRoute}
             {HomeRoute}
             {PokemonDetailsRoute}
           </div>

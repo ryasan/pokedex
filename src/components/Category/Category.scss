@@ -1,6 +1,8 @@
 @import './../../_variables.scss';
 
-.category-container {
+.category-list {
+  grid-area: category-list;
+  border: black 1px solid;
   h3 {
     margin-left: 0.5rem;
   }

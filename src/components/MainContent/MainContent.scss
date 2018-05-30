@@ -1,47 +1,48 @@
 @import './../../_variables.scss';
 
 .main-content {
-    display: grid;
-  }
-  
-  .pagination {
-    text-align: center;
-    li {
-      display: inline-block;
-      &.disabled {
-        a {
-          cursor: not-allowed;
-          color: $disabled_text;
-        }
-      }
-      &.active {
-        background-color: $secondary;
-        a {
-          cursor: default;
-          color: $white;
-        }
-      }
-      &.page,
-      &.next,
-      &.previous {
-        &:hover {
-          background-color: lighten($secondary, 40%);
-        }
-        &.disabled {
-          background-color: $white;
-        }
-      }
+  display: grid;
+  grid-area: main-content;
+  border: black 1px solid;
+}
+
+.pagination {
+  text-align: center;
+  li {
+    display: inline-block;
+    &.disabled {
       a {
-        cursor: pointer;
-        position: relative;
-        float: left;
-        padding: 6px 12px;
-        margin-left: -1px;
-        line-height: 1.42857143;
-        text-decoration: none;
-        border: 1px solid #ddd;
-        color: $secondary;
+        cursor: not-allowed;
+        color: $disabled_text;
       }
     }
+    &.active {
+      background-color: $secondary;
+      a {
+        cursor: default;
+        color: $white;
+      }
+    }
+    &.page,
+    &.next,
+    &.previous {
+      &:hover {
+        background-color: lighten($secondary, 40%);
+      }
+      &.disabled {
+        background-color: $white;
+      }
+    }
+    a {
+      cursor: pointer;
+      position: relative;
+      float: left;
+      padding: 6px 12px;
+      margin-left: -1px;
+      line-height: 1.42857143;
+      text-decoration: none;
+      border: 1px solid #ddd;
+      color: $secondary;
+    }
   }
-  
+}

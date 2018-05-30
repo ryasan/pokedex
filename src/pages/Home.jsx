@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import ReactPaginate from 'react-paginate';
-import PokemonList from './../components/Pokemon/PokemonList';
 import CategoryList from './../components/Category/CategoryList';
 import MainContent from './../components/MainContent/MainContent';
 
@@ -10,7 +9,9 @@ export default class HomePage extends Component {
       pokemon,
       pageCount,
       onPageClick,
-      onFilterClick
+      onFilterClick,
+      history,
+      location
     } = this.props;
 
     return (
@@ -20,6 +21,8 @@ export default class HomePage extends Component {
           pokemon={pokemon}
           pageCount={pageCount}
           onPageClick={onPageClick}
+          history={history}
+          location={location}
         />
       </Fragment>
     );

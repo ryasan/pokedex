@@ -21,5 +21,11 @@ app.use((req, res, next) => {
 });
 // router
 app.use(router);
+// default route *when refreshing page
+app.use('*', (err, res) => {
+  res.sendFile(
+    path.resolve(__dirname, './../public', 'index.html')
+  );
+});
 
 http.listen(port, () => console.log(`server is listening on port: ${port}`));
