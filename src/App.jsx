@@ -15,7 +15,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      pokemon: [],
       categories: [],
       perPage: 12,
       offset: 0,
@@ -67,7 +66,6 @@ class App extends Component {
         render={props => (
           <HomePage
             {...props}
-            pokemon={pokemon}
             pageCount={pageCount}
             perPage={perPage}
             onPageClick={this.handlePageClick.bind(this)}
