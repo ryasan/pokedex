@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PokemonListItem from './PokemonListItem';
+import { connect } from 'react-redux';
 
-export default class PokemonList extends Component {
+class PokemonList extends Component {
   render() {
     const { pokemon, history, location } = this.props;
     const collection = pokemon.map(p => (
@@ -15,3 +16,11 @@ export default class PokemonList extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    pokemon: state.pokemon
+  };
+};
+
+export default connect(mapStateToProps, null)(PokemonList);

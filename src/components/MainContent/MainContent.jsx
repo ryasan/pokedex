@@ -5,10 +5,10 @@ import './MainContent.scss'
 
 export default class MainContent extends Component {
   render() {
-    const { pokemon, pageCount, onPageClick, history, location } = this.props;
+    const { pageCount, onPageClick, history, location } = this.props;
     return (
       <div className="main-content">
-        <PokemonList pokemon={pokemon} history={history} location={location} />
+        <PokemonList history={history} location={location} />
         <ReactPaginate previousLabel="previous"
                        previousLinkClassName="previous-link"
                        nextLabel="next"

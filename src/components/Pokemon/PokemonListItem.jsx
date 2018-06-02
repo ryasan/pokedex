@@ -6,7 +6,7 @@ export default class PokemonListItem extends Component {
     this.props.history.push({
       pathname: `/details/${p.name}`,
       p: p
-    })
+    });
   }
 
   render() {

@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import './App.scss';
+import { storePokemon } from './store';
 import { client } from './client';
 import AppBar from './components/AppBar/AppBar';
 import Loader from './components/Loader/Loader';
@@ -8,7 +11,7 @@ import HomePage from './pages/Home';
 import PokemonDetailsPage from './pages/PokemonDetails';
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
 
-export default class App extends Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -32,6 +35,7 @@ export default class App extends Component {
       categories
     };
     client.getAllPokemon(data => {
+      this.props.storePokemon(data.pokemon);
       this.setState({
         pokemon: data.pokemon,
         pageCount: Math.ceil(data.meta.total_count / data.meta.limit),
@@ -74,7 +78,10 @@ export default class App extends Component {
     );
 
     const PokemonDetailsRoute = (
-      <Route path="/details" component={PokemonDetailsPage} />
+      <Route
+        path="/details"
+        render={props => <PokemonDetailsPage {...props} />}
+      />
     );
 
     const BreadCrumbsRoute = (
@@ -95,3 +102,15 @@ export default class App extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    pokemon: state.pokemon
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ storePokemon }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
