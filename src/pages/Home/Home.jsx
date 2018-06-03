@@ -1,18 +1,14 @@
 import React, { Component, Fragment } from 'react';
-
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import './App.scss';
-import { storePokemon } from './store/actions';
-import { client } from './client';
+import { storePokemon } from './../../store/actions';
+import { client } from './../../client';
 import AppBar from './../../components/AppBar/AppBar';
 import Loader from './../../components/Loader/Loader';
-
 import CategoryList from './../../components/Category/CategoryList';
 import MainContent from './../../components/MainContent/MainContent';
 
-export default class HomePage extends Component {
+class HomePage extends Component {
   constructor() {
     super();
     this.state = {
@@ -54,24 +50,29 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const {
-      pageCount,
-      onPageClick,
-      onFilterClick,
-      history,
-      location
-    } = this.props;
-
     return (
       <Fragment>
-        <CategoryList onFilterClick={onFilterClick} />
+        <CategoryList onFilterClick={this.handleFilterClick} />
         <MainContent
-          pageCount={pageCount}
-          onPageClick={onPageClick}
-          history={history}
-          location={location}
+          pageCount={this.state.pageCount}
+          onPageClick={this.handlePageClick}
+          history={this.props.history}
+          location={this.props.location}
         />
       </Fragment>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    pokemon: state.pokemon,
+    categories: state.categories
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ storePokemon }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
