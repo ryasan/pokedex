@@ -24,10 +24,19 @@ const categories = [
 ];
 
 class CategoryList extends Component {
+  constructor() {
+    super();
+    this.state = {
+      categories: []
+    };
+  }
+
   handleCheckBoxClick(title, isChecked) {
-    const { addCategory, removeCategory } = this.props;
-    isChecked ? addCategory(title) : removeCategory(title);
-    this.props.onFilterClick();
+    const { categories } = this.state;
+    isChecked
+      ? categories.push(title)
+      : categories.splice(categories.indexOf(title), 1);
+    this.props.onFilterClick(categories);
   }
 
   render() {

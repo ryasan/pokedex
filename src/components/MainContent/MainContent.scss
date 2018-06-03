@@ -3,10 +3,10 @@
 .main-content {
   display: grid;
   grid-area: main-content;
-  border: black 1px solid;
 }
 
 .pagination {
+  margin-top: 8rem;
   text-align: center;
   li {
     display: inline-block;

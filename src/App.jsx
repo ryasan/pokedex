@@ -15,6 +15,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      categories: [],
       perPage: 12,
       offset: 0,
       loading: false
@@ -29,8 +30,8 @@ class App extends Component {
   }
 
   loadPokemonFromServer() {
-    const { perPage, offset } = this.state;
-    const query = { limit: perPage, categories: this.props.categories, offset };
+    const { perPage, offset, categories } = this.state;
+    const query = { limit: perPage, categories, offset };
     client.getAllPokemon(this.getAllPokemon, query);
   }
 
@@ -48,8 +49,8 @@ class App extends Component {
     this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
   }
 
-  handleFilterClick() {
-    this.setState({ loading: true }, () => this.loadPokemonFromServer());
+  handleFilterClick(categories) {
+    this.setState({ loading: true, categories }, () => this.loadPokemonFromServer());
   }
 
   render() {

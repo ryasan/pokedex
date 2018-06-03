@@ -22,6 +22,7 @@ module.exports = {
     categoriesReducer(state = [], action) {
       switch (action.type) {
         case 'ADD_CATEGORY':
+        console.log(state.concat(action.payload))
           return state.concat(action.payload);
         case 'REMOVE_CATEGORY':
           return state.filter(t => t !== action.payload);
