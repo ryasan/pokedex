@@ -3,23 +3,25 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './App.scss';
-import { storePokemon } from './store';
+import { storePokemon } from './store/actions';
 import { client } from './client';
 import AppBar from './components/AppBar/AppBar';
 import Loader from './components/Loader/Loader';
-import HomePage from './pages/Home';
-import PokemonDetailsPage from './pages/PokemonDetails';
+import HomePage from './pages/Home/Home';
+import PokemonDetailsPage from './pages/PokemonDetails/PokemonDetails';
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      categories: [],
       perPage: 12,
       offset: 0,
       loading: false
     };
+    this.getAllPokemon     = this.getAllPokemon.bind(this);
+    this.handleFilterClick = this.handleFilterClick.bind(this);
+    this.handlePageClick   = this.handlePageClick.bind(this);
   }
 
   componentDidMount() {
@@ -27,34 +29,27 @@ class App extends Component {
   }
 
   loadPokemonFromServer() {
-    const { perPage, offset, categories } = this.state;
-    const query = {
-      limit: perPage,
-      offset,
-      categories
-    };
-    client.getAllPokemon(data => {
-      this.props.storePokemon(data.pokemon);
-      this.setState({
-        pokemon: data.pokemon,
-        pageCount: Math.ceil(data.meta.total_count / data.meta.limit),
-        loading: false
-      });
-    }, query);
+    const { perPage, offset } = this.state;
+    const query = { limit: perPage, categories: this.props.categories, offset };
+    client.getAllPokemon(this.getAllPokemon, query);
+  }
+
+  getAllPokemon(data) {
+    this.props.storePokemon(data.pokemon);
+    this.setState({
+      pageCount: Math.ceil(data.meta.total_count / data.meta.limit),
+      loading: false
+    });
   }
 
   handlePageClick(data) {
     const selected = data.selected;
     const offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ offset: offset, loading: true }, () =>
-      this.loadPokemonFromServer()
-    );
+    this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
   }
 
-  handleFilterClick(categories) {
-    this.setState({ categories, loading: true }, () =>
-      this.loadPokemonFromServer()
-    );
+  handleFilterClick() {
+    this.setState({ loading: true }, () => this.loadPokemonFromServer());
   }
 
   render() {
@@ -68,8 +63,8 @@ class App extends Component {
             {...props}
             pageCount={pageCount}
             perPage={perPage}
-            onPageClick={this.handlePageClick.bind(this)}
-            onFilterClick={this.handleFilterClick.bind(this)}
+            onPageClick={this.handlePageClick}
+            onFilterClick={this.handleFilterClick}
           />
         )}
       />
@@ -103,7 +98,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    pokemon: state.pokemon
+    pokemon: state.pokemon,
+    categories: state.categories
   };
 };
 

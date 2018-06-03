@@ -8,13 +8,17 @@ const getPaginatedItems = (items, offset) => {
 };
 
 module.exports = {
-  getPokemon: (req, res) => {
+  getPokemon(req, res) {
 
-    let   pokemon        = JSON.parse(fs.readFileSync(DATA_FILE));
     const categories     = req.query.categories.split(',');
     const offset         = req.query.offset ? parseInt(req.query.offset, 10) : 0;
     const nextOffSet     = offset + PER_PAGE;
     const previousOffSet = offset - PER_PAGE < 1 ? 0 : offset - PER_PAGE;
+    let   pokemon        = JSON.parse(fs.readFileSync(DATA_FILE));
+
+    pokemon = pokemon.map(p => {
+      return { id: p.id, name: p.name, types: p.types, imageUrl: p.imageUrl };
+    });
 
     categories[0] ? pokemon = filtered(pokemon, categories) : undefined;
 
@@ -25,14 +29,21 @@ module.exports = {
       previous   : `?limit=${PER_PAGE}&offset=${previousOffSet}`,
       total_count: pokemon.length
     };
-
     const json = {
       pokemon: getPaginatedItems(pokemon, offset),
       meta: meta
     };
+
+    res.setHeader('Cache-Control', 'no-cache');
+    res.json(json);
+  },
+  getOnePokemon(req, res) {
+    const json = findOne(JSON.parse(fs.readFileSync(DATA_FILE)), req.query.title)
+
     res.setHeader('Cache-Control', 'no-cache');
     res.json(json);
   }
+
 };
 
 const filtered = (pokemon, categories) => {
@@ -42,3 +53,7 @@ const filtered = (pokemon, categories) => {
     });
   });
 };
+
+const findOne = (pokemon, name) => {
+  return pokemon.find(p => p.name === name);
+}

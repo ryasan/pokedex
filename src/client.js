@@ -1,15 +1,19 @@
 module.exports = {
   client: {
-    getAllPokemon: (success, query) => {
+    getAllPokemon(success, query) {
       fetch(
         `/api/pokemon?limit=${query.limit}&offset=${query.offset}&categories=${query.categories}`,
-        {
-          headers: { Accept: 'application/json' }
-        }
-      )
-        .then(checkStatus)
-        .then(parseJSON)
-        .then(success);
+        { headers: { Accept: 'application/json' } }
+      ).then(checkStatus)
+       .then(parseJSON)
+       .then(success);
+    },
+    getOnePokemon(success, query) {
+      fetch(`/api/details?title=${query.title}`, 
+      { headers: {Accept: 'application/json'} }
+     ).then(checkStatus)
+      .then(parseJSON)
+      .then(success)
     }
   }
 };
