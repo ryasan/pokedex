@@ -1,3 +1,8 @@
+@import './../../_variables.scss';
+
 .pokemon-details {
-    height: 80vh;
+  height: 80vh;
+  h2 {
+    color: $secondary;
+  }
 }

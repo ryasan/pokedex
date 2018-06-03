@@ -9,7 +9,7 @@ class PokemonListItem extends Component {
   handleClick(p) {
     client.getOnePokemon(this.getOnePokemon.bind(this), { title: p.name });
     this.props.history.push({
-      pathname: `/details/${p.name.toLowerCase()}`,
+      pathname: `/${p.name.toLowerCase()}`,
     });
   }
 

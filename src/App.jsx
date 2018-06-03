@@ -14,44 +14,44 @@ import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
 class App extends Component {
   constructor() {
     super();
-    this.state = {
-      categories: [],
-      perPage: 12,
-      offset: 0,
-      loading: false
-    };
-    this.getAllPokemon     = this.getAllPokemon.bind(this);
-    this.handleFilterClick = this.handleFilterClick.bind(this);
-    this.handlePageClick   = this.handlePageClick.bind(this);
+    // this.state = {
+    //   categories: [],
+    //   perPage: 12,
+    //   offset: 0,
+    //   loading: false
+    // };
+    // this.getAllPokemon     = this.getAllPokemon.bind(this);
+    // this.handleFilterClick = this.handleFilterClick.bind(this);
+    // this.handlePageClick   = this.handlePageClick.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({ loading: true }, () => this.loadPokemonFromServer());
-  }
+  // componentDidMount() {
+  //   this.setState({ loading: true }, () => this.loadPokemonFromServer());
+  // }
 
-  loadPokemonFromServer() {
-    const { perPage, offset, categories } = this.state;
-    const query = { limit: perPage, categories, offset };
-    client.getAllPokemon(this.getAllPokemon, query);
-  }
+  // loadPokemonFromServer() {
+  //   const { perPage, offset, categories } = this.state;
+  //   const query = { limit: perPage, categories, offset };
+  //   client.getAllPokemon(this.getAllPokemon, query);
+  // }
 
-  getAllPokemon(data) {
-    this.props.storePokemon(data.pokemon);
-    this.setState({
-      pageCount: Math.ceil(data.meta.total_count / data.meta.limit),
-      loading: false
-    });
-  }
+  // getAllPokemon(data) {
+  //   this.props.storePokemon(data.pokemon);
+  //   this.setState({
+  //     pageCount: Math.ceil(data.meta.total_count / data.meta.limit),
+  //     loading: false
+  //   });
+  // }
 
-  handlePageClick(data) {
-    const selected = data.selected;
-    const offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
-  }
+  // handlePageClick(data) {
+  //   const selected = data.selected;
+  //   const offset = Math.ceil(selected * this.state.perPage);
+  //   this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
+  // }
 
-  handleFilterClick(categories) {
-    this.setState({ loading: true, categories }, () => this.loadPokemonFromServer());
-  }
+  // handleFilterClick(categories) {
+  //   this.setState({ loading: true, categories }, () => this.loadPokemonFromServer());
+  // }
 
   render() {
     const { pokemon, pageCount, perPage, loading } = this.state;
@@ -73,7 +73,7 @@ class App extends Component {
 
     const PokemonDetailsRoute = (
       <Route
-        path="/details"
+        path="/:details"
         render={props => <PokemonDetailsPage {...props} />}
       />
     );

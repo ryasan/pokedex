@@ -3,6 +3,7 @@
 .pokemon-list {
   filter: drop-shadow(25px 25px 10px rgb(150, 148, 148));
   .card {
+    color: $normal_text;
     position: relative;
     margin: 1rem 0.6rem;
     display: inline-block;
@@ -33,46 +34,15 @@
       z-index: 100;
 
       img {
-        $width-large: 300px;
-        width: $width-large;
-        height: calc(1.4 * #{$width-large});
+        $width_large: 18rem;
+        width: $width_large;
+        height: calc(1.4 * #{$width_large});
         position: relative;
         top: calc(
-          (-1 * (1.4 * #{$width-large}) / 2) + ((1.4 * #{$width_normal}) / 2)
+          (-1 * (1.4 * #{$width_large}) / 2) + ((1.4 * #{$width_normal}) / 2)
         );
-        left: calc((-1 * #{$width-large} / 2) + (#{$width_normal} / 2));
+        left: calc((-1 * #{$width_large} / 2) + (#{$width_normal} / 2));
       }
     }
-  }
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotateY(-70deg);
-  }
-  90% {
-    transform: rotateY(70deg);
-  }
-  100% {
-    transform: rotateY(290deg);
-  }
-}
-@keyframes float {
-  0% {
-    top: -5px;
-  }
-  50% {
-    top: 5px;
-  }
-  100% {
-    top: -5px;
-  }
-}
-@keyframes spinner {
-  0% {
-    transform: rotateZ(0deg);
-  }
-  100% {
-    transform: rotateZ(360deg);
   }
 }

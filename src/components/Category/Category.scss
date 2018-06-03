@@ -4,10 +4,12 @@
   grid-area: category-list;
   h3 {
     margin-left: 0.5rem;
+    color: $primary;
   }
 }
 
 .category-form {
+  color: $normal_text;
   display: block;
   position: relative;
   padding-left: 1.5rem;
