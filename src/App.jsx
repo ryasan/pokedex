@@ -8,32 +8,14 @@ import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
 
 export default class App extends Component {
   render() {
-    const HomeRoute = (
-      <Route exact path="/" render={props => <HomePage {...props} />} />
-    );
-
-    const PokemonDetailsRoute = (
-      <Route
-        path="/:details"
-        render={props => <PokemonDetailsPage {...props} />}
-      />
-    );
-
-    const BreadCrumbsRoute = (
-      <Route render={props => <BreadCrumbs {...props} />} />
-    );
-
     return (
       <Fragment>
         <AppBar />
         <BrowserRouter>
           <div className="container">
-            <Route render={props => <BreadCrumbs {...props} />} />
-            <Route exact path="/" render={props => <HomePage {...props} />} />
-            <Route
-              path="/:details"
-              render={props => <PokemonDetailsPage {...props} />}
-            />
+            <Route component={BreadCrumbs} />
+            <Route exact path="/" component={HomePage} />
+            <Route path="/:details" component={PokemonDetailsPage} />
           </div>
         </BrowserRouter>
       </Fragment>
