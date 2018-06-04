@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { storeSelectedPokemon } from './../../store/actions';
+import { storePokemonName } from './../../store/actions';
 import './Pokemon.scss';
-import { client } from './../../client';
 
 class PokemonListItem extends Component {
   handleClick(p) {
-    client.getOnePokemon(this.getOnePokemon.bind(this), { title: p.name });
+    this.props.storePokemonName(p.name);
     this.props.history.push({
       pathname: `/${p.name.toLowerCase()}`,
     });
   }
 
-  getOnePokemon(data) {
-    this.props.storeSelectedPokemon(data);
-  }
-
   render() {
-    const { p, history, location } = this.props;
+    const { p } = this.props;
     const category = p.types[0].toLowerCase();
 
     return (
@@ -32,14 +27,8 @@ class PokemonListItem extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    selectedPokemon: state.selectedPokemon
-  };
-};
-
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ storeSelectedPokemon }, dispatch);
+  return bindActionCreators({ storePokemonName }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PokemonListItem);
+export default connect(null, mapDispatchToProps)(PokemonListItem);

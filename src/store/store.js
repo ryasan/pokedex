@@ -7,7 +7,8 @@ import { reducer } from './reducers';
 const allReducers = combineReducers({
   pokemon: reducer.pokemonReducer,
   categories: reducer.categoriesReducer,
-  selectedPokemon: reducer.selectedPokemonReducer
+  selectedPokemon: reducer.selectedPokemonReducer,
+  pokemonName: reducer.pokemonNameReducer
 });
 
 const persistConfig = {

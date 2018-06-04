@@ -27,8 +27,8 @@ class HomePage extends Component {
 
   loadPokemonFromServer() {
     const { perPage, offset, categories } = this.state;
-    const query = { limit: perPage, categories, offset };
-    client.getAllPokemon(this.getAllPokemon, query);
+    const query = { limit: perPage, offset, categories };
+    client.getAllPokemon(query, this.getAllPokemon);
   }
 
   getAllPokemon(data) {
@@ -50,15 +50,20 @@ class HomePage extends Component {
   }
 
   render() {
+    const LOADING = <Loader />;
+    const CONTENT = (
+      <MainContent
+        pageCount={this.state.pageCount}
+        onPageClick={this.handlePageClick}
+        history={this.props.history}
+        location={this.props.location}
+      />
+    );
+
     return (
       <Fragment>
         <CategoryList onFilterClick={this.handleFilterClick} />
-        <MainContent
-          pageCount={this.state.pageCount}
-          onPageClick={this.handlePageClick}
-          history={this.props.history}
-          location={this.props.location}
-        />
+        {this.state.loading ? LOADING : CONTENT}
       </Fragment>
     );
   }

@@ -6,6 +6,13 @@ const storePokemon = pokemon => {
   };
 };
 
+const storePokemonName = pokemonName => {
+  return {
+    type: 'POKEMON_NAME',
+    payload: pokemonName
+  };
+};
+
 const storeSelectedPokemon = selectedPokemon => {
   return {
     type: 'SELECTED_POKEMON',
@@ -27,4 +34,10 @@ const removeCategory = category => {
   };
 };
 
-export { storePokemon, storeSelectedPokemon, addCategory, removeCategory };
+export {
+  storePokemon,
+  storePokemonName,
+  storeSelectedPokemon,
+  addCategory,
+  removeCategory
+};
