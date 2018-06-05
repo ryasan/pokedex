@@ -7,6 +7,7 @@ import AppBar from './../../components/AppBar/AppBar';
 import Loader from './../../components/Loader/Loader';
 import CategoryList from './../../components/Category/CategoryList';
 import MainContent from './../../components/MainContent/MainContent';
+import PokemonDetails from '../PokemonDetails/PokemonDetails';
 
 class HomePage extends Component {
   constructor() {
@@ -16,10 +17,12 @@ class HomePage extends Component {
       perPage: 12,
       offset: 0,
       loading: false,
+      isModalOpen: false
     };
     this.getAllPokemon     = this.getAllPokemon.bind(this);
     this.handleFilterClick = this.handleFilterClick.bind(this);
     this.handlePageClick   = this.handlePageClick.bind(this);
+    this.handleModalToggle = this.handleModalToggle.bind(this);
   }
   componentDidMount() {
     this.setState({ loading: true }, () => this.loadPokemonFromServer());
@@ -49,15 +52,28 @@ class HomePage extends Component {
     this.setState({ loading: true, categories }, () => this.loadPokemonFromServer());
   }
 
+  handleModalToggle() {
+    this.setState({
+      isModalOpen: true
+    })
+  }
+
   render() {
+    const MODAL = <div>
+      <div className="backdrop"></div>
+      <PokemonDetails />
+    </div>
+
     return (
       <Fragment>
+        {this.state.isModalOpen ? MODAL : ''}
         <CategoryList onFilterClick={this.handleFilterClick} />
         <MainContent pageCount={this.state.pageCount}
-                     loading={this.state.loading}
-                     onPageClick={this.handlePageClick}
-                     history={this.props.history}
-                     location={this.props.location} />
+          loading={this.state.loading}
+          onPageClick={this.handlePageClick}
+          history={this.props.history}
+          location={this.props.location}
+          onModalToggle={this.handleModalToggle} />
       </Fragment>
     );
   }

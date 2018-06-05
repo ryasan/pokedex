@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { storePokemonName } from './../../store/actions';
@@ -7,9 +7,10 @@ import './Pokemon.scss';
 class PokemonListItem extends Component {
   handleClick(p) {
     this.props.storePokemonName(p.name);
-    this.props.history.push({
-      pathname: `/${p.name.toLowerCase()}`,
-    });
+    this.props.onModalToggle()
+    // this.props.history.push({
+    //   pathname: `/${p.name.toLowerCase()}`,
+    // });
   }
 
   render() {
@@ -17,10 +18,12 @@ class PokemonListItem extends Component {
     const category = p.types[0].toLowerCase();
 
     return (
-      <a className="card" onClick={this.handleClick.bind(this, p)}>
+      <Fragment>
+        <a className="card" onClick={this.handleClick.bind(this, p)}>
           {p.name}
           <img src={p.imageUrl} alt={`img-${p.name}`} />
-      </a>
+        </a>
+      </Fragment>
     );
   }
 }

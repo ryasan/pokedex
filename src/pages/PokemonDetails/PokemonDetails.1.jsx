@@ -79,7 +79,7 @@ class PokemonDetailsPage extends Component {
                 <li>weight: {roundNumber(selectedPokemon.weight)} kg</li>
               </ul>
             </div>
-          </div>{' '}
+          </div>
         </div>
       </div>
     );

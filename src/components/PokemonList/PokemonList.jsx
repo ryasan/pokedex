@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 
 class PokemonList extends Component {
   render() {
-    const { pokemon, history, location } = this.props;
+    const { pokemon, history, location, onModalToggle } = this.props;
     const collection = pokemon.map(p => (
-      <PokemonListItem key={p.id} p={p} history={history} location={location} />
+      <PokemonListItem key={p.id} p={p} history={history} location={location} onModalToggle={onModalToggle} />
     ));
 
     return (

@@ -6,8 +6,8 @@ import Loader from './../Loader/Loader';
 
 export default class MainContent extends Component {
   render() {
-    const { pageCount, onPageClick, history, location, loading } = this.props;
-    const POKEMON_LIST = <PokemonList history={history} location={location} />;
+    const { pageCount, onPageClick, history, location, loading, onModalToggle } = this.props;
+    const POKEMON_LIST = <PokemonList history={history} location={location} onModalToggle={onModalToggle} />;
     const LOADER = <Loader />
     return (
       <div className="main-content">
