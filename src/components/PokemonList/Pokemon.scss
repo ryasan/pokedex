@@ -12,6 +12,7 @@
     padding: 2% 0;
     height: calc(1.4 * #{$width_normal});
     border-radius: 0.5rem;
+    border: transparentize($primary, 0.6) 3px solid;
     img {
       display: block;
       position: relative;

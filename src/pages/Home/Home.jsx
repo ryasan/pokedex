@@ -15,7 +15,7 @@ class HomePage extends Component {
       categories: [],
       perPage: 12,
       offset: 0,
-      loading: false
+      loading: false,
     };
     this.getAllPokemon     = this.getAllPokemon.bind(this);
     this.handleFilterClick = this.handleFilterClick.bind(this);
@@ -40,6 +40,7 @@ class HomePage extends Component {
   }
 
   handlePageClick(data) {
+    console.log(arguments)
     const selected = data.selected;
     const offset = Math.ceil(selected * this.state.perPage);
     this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
@@ -50,20 +51,14 @@ class HomePage extends Component {
   }
 
   render() {
-    const LOADING = <Loader />;
-    const CONTENT = (
-      <MainContent
-        pageCount={this.state.pageCount}
-        onPageClick={this.handlePageClick}
-        history={this.props.history}
-        location={this.props.location}
-      />
-    );
-
     return (
       <Fragment>
         <CategoryList onFilterClick={this.handleFilterClick} />
-        {this.state.loading ? LOADING : CONTENT}
+        <MainContent pageCount={this.state.pageCount}
+                     loading={this.state.loading}
+                     onPageClick={this.handlePageClick}
+                     history={this.props.history}
+                     location={this.props.location} />
       </Fragment>
     );
   }

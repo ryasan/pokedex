@@ -18,10 +18,8 @@ class PokemonListItem extends Component {
 
     return (
       <a className="card" onClick={this.handleClick.bind(this, p)}>
-        <div className="inner">
           {p.name}
           <img src={p.imageUrl} alt={`img-${p.name}`} />
-        </div>
       </a>
     );
   }
