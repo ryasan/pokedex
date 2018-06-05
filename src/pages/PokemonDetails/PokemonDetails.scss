@@ -2,18 +2,17 @@
 
 .details-wrapper {
   width: 100vw;
-  border: black 1px solid;
   .pokemon-details {
-    height: 80vh;
+    height: 40vh;
+    width: 600px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr;
     .content {
       display: grid;
       grid-template-columns: 1fr;
       grid-template-rows: 4.5rem 18.75rem;
-      width: $width_large;
       &.col-1 {
-        border: blue 1px solid;
         grid-template-areas:
           'title'
           'image-grid';
@@ -55,13 +54,13 @@
       }
 
       &.col-2 {
-        border: red 1px solid;
         grid-template-areas:
           '.'
           'meta';
         .meta {
           grid-area: meta;
           ul {
+            line-height: 3rem;
             li {
               list-style-type: none;
               color: $normal_text;

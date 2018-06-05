@@ -1,13 +1,22 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:700');
 
-.container {
-  font-family: 'PT Sans', sans-serif;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 8fr 1fr;
-  grid-template-areas:
-    'bread-crumbs bread-crumbs bread-crumbs'
-    'category-list main-content .';
+.app-wrapper {
+  // position: absolute;
+  // top: 0px;
+  // left: 0px;
+  // width: 100%;
+  // height: 100%;
+  // z-index: 9998;
+  // background: rgba(0, 0, 0, 0.3);
+  .container {
+    font-family: 'PT Sans', sans-serif;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 8fr 1fr;
+    grid-template-areas:
+      'bread-crumbs bread-crumbs bread-crumbs'
+      'category-list main-content .';
+  }
 }

@@ -40,7 +40,6 @@ class HomePage extends Component {
   }
 
   handlePageClick(data) {
-    console.log(arguments)
     const selected = data.selected;
     const offset = Math.ceil(selected * this.state.perPage);
     this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
