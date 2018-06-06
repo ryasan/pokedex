@@ -1,29 +1,11 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { addCategory, removeCategory } from './../../store/actions';
-import CategoryListItem from './CategoryListItem';
 import './Category.scss';
+import CategoryListItem from './CategoryListItem';
+import categoryHelpers from './CategoryListHelpers';
 
-const categories = [
-  'Grass',
-  'Poison',
-  'Fire',
-  'Flying',
-  'Water',
-  'Bug',
-  'Normal',
-  'Electric',
-  'Ground',
-  'Fighting',
-  'Psychic',
-  'Rock',
-  'Ice',
-  'Ghost',
-  'Dragon'
-];
-
-class CategoryList extends Component {
+export default class CategoryList extends Component {
   constructor() {
     super();
     this.state = {
@@ -40,7 +22,7 @@ class CategoryList extends Component {
   }
 
   render() {
-    const categoryList = categories.map((title, i) => (
+    const categoryList = categoryHelpers.categories.map((title, i) => (
       <CategoryListItem
         key={i}
         title={title}
@@ -56,9 +38,3 @@ class CategoryList extends Component {
     );
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ addCategory, removeCategory }, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(CategoryList);

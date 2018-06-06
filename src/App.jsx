@@ -1,18 +1,96 @@
 import React, { Component, Fragment } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { storePokemon } from './store/actions';
+import { client } from './client';
 import './App.scss';
 import AppBar from './components/AppBar/AppBar';
-import HomePage from './pages/Home/Home';
+import CategoryList from './components/CategoryList/CategoryList';
+import MainContent from './components/MainContent/MainContent';
+import Modal from './components/Modal/Modal';
 
-export default class App extends Component {
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      categories: [],
+      perPage: 12,
+      offset: 0,
+      loading: false,
+      isModalOpen: false
+    };
+    this.getAllPokemon     = this.getAllPokemon.bind(this);
+    this.handleFilterClick = this.handleFilterClick.bind(this);
+    this.handlePageClick   = this.handlePageClick.bind(this);
+    this.handleModalToggle = this.handleModalToggle.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({ loading: true }, () => this.loadPokemonFromServer());
+  }
+
+  loadPokemonFromServer() {
+    const { perPage, offset, categories } = this.state;
+    const query = { limit: perPage, offset, categories };
+    client.getAllPokemon(query, this.getAllPokemon);
+  }
+
+  getAllPokemon(data) {
+    this.props.storePokemon(data.pokemon);
+    this.setState({
+      pageCount: Math.ceil(data.meta.total_count / data.meta.limit),
+      loading: false
+    });
+  }
+
+  handlePageClick(data) {
+    const selected = data.selected;
+    const offset = Math.ceil(selected * this.state.perPage);
+    this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
+  }
+
+  handleFilterClick(categories) {
+    this.setState({ loading: true, categories }, () => this.loadPokemonFromServer());
+  }
+
+  handleModalToggle() {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
+  }
+
   render() {
+    const MODAL = <Modal onModalToggle={this.handleModalToggle} />;
+
     return (
-      <Fragment>
+      <div className="app-wrapper">
+        {this.state.isModalOpen ? MODAL : ''}
         <AppBar />
         <div className="container">
-          <HomePage />
+          <CategoryList onFilterClick={this.handleFilterClick} />
+          <MainContent
+            pageCount={this.state.pageCount}
+            loading={this.state.loading}
+            onPageClick={this.handlePageClick}
+            history={this.props.history}
+            location={this.props.location}
+            onModalToggle={this.handleModalToggle}
+          />
         </div>
-      </Fragment>
+      </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    pokemon: state.pokemon,
+    categories: state.categories
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ storePokemon }, dispatch);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

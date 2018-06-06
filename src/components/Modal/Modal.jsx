@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import './Modal.scss';
 import { client } from './../../client';
+import modalHelpers from './ModalHelpers';
 import Loader from './../Loader/Loader';
 
 class Modal extends Component {
@@ -35,16 +35,7 @@ class Modal extends Component {
       );
     }
 
-    const sprites = Object.values(selectedPokemon.sprites)
-      .filter(filter)
-      .map((sprite, i) => (
-        <img
-          className={`sprite sprite-${i + 1}`}
-          key={i}
-          src={sprite}
-          alt={`${selectedPokemon.name}-${i + 1}`}
-        />
-      ));
+    const sprites = modalHelpers.filterSprites(selectedPokemon.sprites, selectedPokemon.name)
 
     return (
       <Fragment>
@@ -74,8 +65,8 @@ class Modal extends Component {
                       .map(type => type.toLowerCase())
                       .join(', ')}
                   </li>
-                  <li>height: {roundNumber(selectedPokemon.height)} m</li>
-                  <li>weight: {roundNumber(selectedPokemon.weight)} kg</li>
+                  <li>height: {modalHelpers.roundNumber(selectedPokemon.height)} m</li>
+                  <li>weight: {modalHelpers.roundNumber(selectedPokemon.weight)} kg</li>
                 </ul>
               </div>
             </div>
@@ -85,15 +76,6 @@ class Modal extends Component {
     );
   }
 }
-
-const filter = url => {
-  let regex = /\/shiny\//;
-  return url && !regex.test(url);
-};
-
-const roundNumber = num => {
-  return (num * 100) / 1000;
-};
 
 const mapStateToProps = state => {
   return {

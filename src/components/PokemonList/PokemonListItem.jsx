@@ -7,10 +7,7 @@ import './Pokemon.scss';
 class PokemonListItem extends Component {
   handleClick(p) {
     this.props.storePokemonName(p.name);
-    this.props.onModalToggle()
-    // this.props.history.push({
-    //   pathname: `/${p.name.toLowerCase()}`,
-    // });
+    this.props.onModalToggle();
   }
 
   render() {

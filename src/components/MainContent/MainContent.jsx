@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import './MainContent.scss';
 import PokemonList from './../PokemonList/PokemonList';
@@ -7,13 +7,19 @@ import Loader from './../Loader/Loader';
 export default class MainContent extends Component {
   render() {
     const { pageCount, onPageClick, history, location, loading, onModalToggle } = this.props;
-    const CONTENT = (
-      <Fragment>
-        <PokemonList
-          history={history}
-          location={location}
-          onModalToggle={onModalToggle}
-        />
+
+    const POKEMON_LIST = (
+      <PokemonList
+        history={history}
+        location={location}
+        onModalToggle={onModalToggle}
+      />
+    );
+    const LOADER = <Loader />;
+
+    return (
+      <div className="main-content">
+        {loading ? LOADER : POKEMON_LIST}
         <ReactPaginate
           previousLabel="previous"
           previousLinkClassName="previous-link"
@@ -30,10 +36,7 @@ export default class MainContent extends Component {
           subContainerClassName="pages pagination"
           activeClassName="active"
         />
-      </Fragment>
+      </div>
     );
-    const LOADER = <Loader />;
-
-    return <div className="main-content">{loading ? LOADER : CONTENT}</div>;
   }
 }

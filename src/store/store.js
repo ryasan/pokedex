@@ -6,7 +6,6 @@ import { reducer } from './reducers';
 /****** store *******/
 const allReducers = combineReducers({
   pokemon: reducer.pokemonReducer,
-  categories: reducer.categoriesReducer,
   selectedPokemon: reducer.selectedPokemonReducer,
   pokemonName: reducer.pokemonNameReducer
 });

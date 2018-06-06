@@ -20,24 +20,4 @@ const storeSelectedPokemon = selectedPokemon => {
   };
 };
 
-const addCategory = category => {
-  return {
-    type: 'ADD_CATEGORY',
-    payload: category
-  };
-};
-
-const removeCategory = category => {
-  return {
-    type: 'REMOVE_CATEGORY',
-    payload: category
-  };
-};
-
-export {
-  storePokemon,
-  storePokemonName,
-  storeSelectedPokemon,
-  addCategory,
-  removeCategory
-};
+export { storePokemon, storePokemonName, storeSelectedPokemon };
