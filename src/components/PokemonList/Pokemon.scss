@@ -2,6 +2,7 @@
 
 .pokemon-list {
   filter: drop-shadow(25px 25px 10px rgb(150, 148, 148));
+  width: $width_very_large;
   .card {
     color: $normal_text;
     position: relative;

@@ -3,11 +3,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { storePokemon } from './../../store/actions';
 import { client } from './../../client';
-import AppBar from './../../components/AppBar/AppBar';
-import Loader from './../../components/Loader/Loader';
+import './Home.scss'
 import CategoryList from './../../components/Category/CategoryList';
 import MainContent from './../../components/MainContent/MainContent';
-import PokemonDetails from '../PokemonDetails/PokemonDetails';
+import Modal from './../../components/Modal/Modal';
 
 class HomePage extends Component {
   constructor() {
@@ -54,26 +53,25 @@ class HomePage extends Component {
 
   handleModalToggle() {
     this.setState({
-      isModalOpen: true
-    })
+      isModalOpen: !this.state.isModalOpen
+    });
   }
 
   render() {
-    const MODAL = <div>
-      <div className="backdrop"></div>
-      <PokemonDetails />
-    </div>
+    const MODAL = (<Modal onModalToggle={this.handleModalToggle} />);
 
     return (
       <Fragment>
         {this.state.isModalOpen ? MODAL : ''}
         <CategoryList onFilterClick={this.handleFilterClick} />
-        <MainContent pageCount={this.state.pageCount}
+        <MainContent
+          pageCount={this.state.pageCount}
           loading={this.state.loading}
           onPageClick={this.handlePageClick}
           history={this.props.history}
           location={this.props.location}
-          onModalToggle={this.handleModalToggle} />
+          onModalToggle={this.handleModalToggle}
+        />
       </Fragment>
     );
   }
