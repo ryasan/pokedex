@@ -6,7 +6,8 @@ import { client } from './client';
 import './App.scss';
 import AppBar from './components/AppBar/AppBar';
 import CategoryList from './components/CategoryList/CategoryList';
-import MainContent from './components/MainContent/MainContent';
+import PokemonList from './components/PokemonList/PokemonList';
+import Paginate from './components/Paginate/Paginate';
 import Modal from './components/Modal/Modal';
 
 class App extends Component {
@@ -54,9 +55,7 @@ class App extends Component {
   }
 
   handleModalToggle() {
-    this.setState({
-      isModalOpen: !this.state.isModalOpen
-    });
+    this.setState({ isModalOpen: !this.state.isModalOpen });
   }
 
   render() {
@@ -68,14 +67,17 @@ class App extends Component {
         <AppBar />
         <div className="container">
           <CategoryList onFilterClick={this.handleFilterClick} />
-          <MainContent
-            pageCount={this.state.pageCount}
-            loading={this.state.loading}
-            onPageClick={this.handlePageClick}
+          <div className="main">
+          <PokemonList
             history={this.props.history}
             location={this.props.location}
             onModalToggle={this.handleModalToggle}
           />
+          <Paginate
+            pageCount={this.state.pageCount}
+            onPageClick={this.handlePageClick}
+          />
+          </div>
         </div>
       </div>
     );

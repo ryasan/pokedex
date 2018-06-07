@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:700');
+@import './_variables.scss';
 
 .container {
   font-family: 'PT Sans', sans-serif;
@@ -8,5 +9,10 @@
   grid-template-columns: 1fr 8fr 1fr;
   grid-template-areas:
     'bread-crumbs bread-crumbs bread-crumbs'
-    'category-list main-content .';
+    'category-list main .';
+}
+
+
+.main {
+  grid-area: main;
 }
