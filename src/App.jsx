@@ -9,7 +9,7 @@ import CategoryList from './components/CategoryList/CategoryList';
 import PokemonList from './components/PokemonList/PokemonList';
 import Paginate from './components/Paginate/Paginate';
 import Modal from './components/Modal/Modal';
-
+import Loader from './components/Loader/Loader';
 class App extends Component {
   constructor() {
     super();
@@ -59,7 +59,13 @@ class App extends Component {
   }
 
   render() {
+    const LOADER = <Loader />
     const MODAL = <Modal onModalToggle={this.handleModalToggle} />;
+    const POKEMON_LIST = <PokemonList
+      history={this.props.history}
+      location={this.props.location}
+      onModalToggle={this.handleModalToggle}
+    />
 
     return (
       <div className="app-wrapper">
@@ -68,11 +74,7 @@ class App extends Component {
         <div className="container">
           <CategoryList onFilterClick={this.handleFilterClick} />
           <div className="main">
-          <PokemonList
-            history={this.props.history}
-            location={this.props.location}
-            onModalToggle={this.handleModalToggle}
-          />
+          {this.state.loading ? LOADER : POKEMON_LIST}
           <Paginate
             pageCount={this.state.pageCount}
             onPageClick={this.handlePageClick}

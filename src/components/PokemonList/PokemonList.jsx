@@ -6,7 +6,13 @@ class PokemonList extends Component {
   render() {
     const { pokemon, history, location, onModalToggle } = this.props;
     const collection = pokemon.map(p => (
-      <PokemonListItem key={p.id} p={p} history={history} location={location} onModalToggle={onModalToggle} />
+      <PokemonListItem
+        key={p.id}
+        p={p}
+        history={history}
+        location={location}
+        onModalToggle={onModalToggle}
+      />
     ));
 
     return (
@@ -23,4 +29,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(PokemonList);
+export default connect(mapStateToProps, null)(PokemonList); 
