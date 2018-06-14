@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=PT+Sans:700');
 @import './_variables.scss';
 
+.app-wrapper {
+  height: 100%;
+  overflow: scroll;
+}
+
 .container {
   font-family: 'PT Sans', sans-serif;
   width: 100%;
@@ -11,7 +16,6 @@
     'bread-crumbs bread-crumbs bread-crumbs'
     'category-list main .';
 }
-
 
 .main {
   grid-area: main;
