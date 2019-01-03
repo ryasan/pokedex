@@ -1,7 +1,7 @@
 @import './../../_variables.scss';
 
 .pokemon-list {
-  filter: drop-shadow(25px 25px 10px rgb(150, 148, 148));
+  // filter: drop-shadow(25px 25px 10px rgb(150, 148, 148));
   width: $width_very_large;
   .card {
     color: $normal_text;
@@ -13,7 +13,8 @@
     padding: 2% 0;
     height: calc(1.4 * #{$width_normal});
     border-radius: 0.5rem;
-    border: transparentize($primary, 0.6) 3px solid;
+    border: transparentize($primary, 0.6) 1px solid;
+    box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.3);
     img {
       display: block;
       position: relative;
