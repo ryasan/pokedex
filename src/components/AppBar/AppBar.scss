@@ -6,29 +6,47 @@
   padding: 0.5rem;
   margin-bottom: 20px;
   line-height: 1rem;
-  display: table;
+  display: flex;
   box-shadow: 0 3px 5px 0 #380b0b;
-  .nav-item {
-    vertical-align: middle;
-    display: table-cell;
-    &.title {
-      color: $white;
-      text-align: center;
-      padding-right: 15%;
-    }
-    img {
+  justify-content: space-between;
+  .title {
+    color: $white;
+  }
+  img {
+    width: 50px;
+    height: 50px;
+    &.poke-icon {
       animation: brand-spin infinite 20s linear;
-      width: 50px;
-      height: 50px;
     }
+    &.gh-icon:hover {
+      animation: wobble 1s;
+    }
+  }
+}
 
-    @keyframes brand-spin {
-      from {
-        transform: rotate(0deg);
-      }
-      to {
-        transform: rotate(360deg);
-      }
-    }
+@keyframes wobble {
+  0% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-30deg);
+  }
+  50% {
+    transform: rotate(30deg);
+  }
+  75% {
+    transform: rotate(-30deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes brand-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
