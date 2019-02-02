@@ -8,52 +8,82 @@
   }
 }
 
-.category-form {
-  color: $normal_text;
+.input-group {
+  background-color: #fff;
   display: block;
+  margin: 0;
   position: relative;
-  padding-left: 1.5rem;
-  margin-bottom: 0.7rem;
-  margin-left: 1rem;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  &:hover input ~ .checkmark {
-    background-color: lighten($secondary, 40%);
-  }
-  input {
-    position: absolute;
-    opacity: 0;
+  label {
+    padding: 12px 10px;
+    width: 100%;
+    display: block;
+    text-align: left;
+    color: #3C454C;
     cursor: pointer;
-    &:checked ~ .checkmark {
+    position: relative;
+    z-index: 2;
+    transition: color 200ms ease-in;
+    overflow: hidden;
+
+    &:before {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      content: '';
       background-color: $secondary;
-      &:after {
-        display: block;
-      }
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%) scale3d(1, 1, 1);
+      transition: all 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+      opacity: 0;
+      z-index: -1;
+    }
+
+    &:after {
+      width: 20px;
+      height: 20px;
+      content: '';
+      border: 2px solid #D1D7DC;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.414 11L4 12.414l5.414 5.414L20.828 6.414 19.414 5l-10 10z' fill='%23fff' fill-rule='nonzero'/%3E%3C/svg%3E ");
+      background-repeat: no-repeat;
+      background-position: -3px 0;
+      border-radius: 50%;
+      z-index: 2;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      transition: all 200ms ease-in;
     }
   }
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 1.3rem;
-    width: 1.3rem;
-    border: $secondary 2px solid;
-    border-radius: 0.3rem;
-    &:after {
-      content: '';
-      position: absolute;
-      display: none;
-      left: 0.3rem;
-      width: 0.3rem;
-      height: 0.6rem;
-      border: solid $white;
-      border-width: 0 0.2rem 0.2rem 0;
-      -webkit-transform: rotate(45deg);
-      -ms-transform: rotate(45deg);
-      transform: rotate(45deg);
+
+  input:checked ~ label {
+    color: #fff;
+
+    &:before {
+      transform: translate(-50%, -50%) scale3d(56, 56, 1);
+      opacity: 1;
     }
+
+    &:after {
+      background-color: $primary;
+      border-color: $primary;
+    }
+  }
+
+  input {
+    width: 32px;
+    height: 32px;
+    order: 1;
+    z-index: 2;
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    visibility: hidden;
   }
 }

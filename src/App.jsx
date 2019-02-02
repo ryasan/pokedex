@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { storePokemon } from './store/actions';
 import { client } from './client';
-import './App.scss';
 import AppBar from './components/AppBar/AppBar';
 import CategoryList from './components/CategoryList/CategoryList';
 import PokemonList from './components/PokemonList/PokemonList';

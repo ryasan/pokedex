@@ -1,22 +1,20 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 export default class CategoryListItem extends Component {
   render() {
     const { title, onCheckBoxClick } = this.props;
 
     return (
-      <Fragment>
-        <label className="category-form">
-          {title}
-          <input
-            type="checkbox"
-            name={title}
-            value={title}
-            onChange={e => onCheckBoxClick(title, e.target.checked)}
-          />
-          <span className="checkmark" />
-        </label>
-      </Fragment>
+      <div className="input-group">
+        <input
+          type="checkbox"
+          id={title}
+          name={title}
+          value={title}
+          onChange={e => onCheckBoxClick(title, e.target.checked)}
+        />
+        <label htmlFor={title}>{title}</label>
+      </div>
     );
   }
 }
