@@ -7,6 +7,18 @@ const getPaginatedItems = (items, offset) => {
   return items.slice(offset, offset + PER_PAGE);
 };
 
+const filtered = (pokemon, categories) => {
+  return pokemon.filter(p => {
+    return categories.some(category => {
+      return p.types.indexOf(category) !== -1;
+    });
+  });
+};
+
+const findOne = (pokemon, name) => {
+  return pokemon.find(p => p.name === name);
+}
+
 module.exports = {
   getPokemon(req, res) {
 
@@ -46,14 +58,3 @@ module.exports = {
 
 };
 
-const filtered = (pokemon, categories) => {
-  return pokemon.filter(p => {
-    return categories.some(category => {
-      return p.types.indexOf(category) !== -1;
-    });
-  });
-};
-
-const findOne = (pokemon, name) => {
-  return pokemon.find(p => p.name === name);
-}
