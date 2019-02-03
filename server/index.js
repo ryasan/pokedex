@@ -7,7 +7,7 @@ const fs         = require('fs');
 const app    = express();
 const http   = require('http').Server(app);
 const router = require('./routes');
-const port   = process.env.PORT || 1128;
+const port   = process.env.PORT || 80;
 // middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
