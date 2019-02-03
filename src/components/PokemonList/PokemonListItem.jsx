@@ -12,7 +12,6 @@ class PokemonListItem extends Component {
 
   render() {
     const { p } = this.props;
-    const category = p.types[0].toLowerCase();
 
     return (
       <Fragment>
