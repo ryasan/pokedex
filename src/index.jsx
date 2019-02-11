@@ -10,8 +10,8 @@ const store = configureStore().store;
 const persistor = configureStore().persistor;
 
 const WRAPPED_APP = (
-  <Provider store={store}>
-    <PersistGate persistor={persistor}>
+  <Provider store={store}> // redux
+    <PersistGate persistor={persistor}> // persist on page refresh
       <App />
     </PersistGate>
   </Provider>
