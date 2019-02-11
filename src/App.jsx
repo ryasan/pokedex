@@ -44,8 +44,7 @@ class App extends Component {
     });
   }
 
-  handlePageClick(data) {
-    const selected = data.selected;
+  handlePageClick({ selected }) {
     const offset = Math.ceil(selected * this.state.perPage);
     this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
   }
