@@ -64,8 +64,7 @@ class App extends Component {
       <PokemonList
         history={this.props.history}
         location={this.props.location}
-        onModalToggle={this.handleModalToggle}
-      />
+        onModalToggle={this.handleModalToggle} />
     );
 
     return (
