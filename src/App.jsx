@@ -23,6 +23,7 @@ class App extends Component {
     this.handleFilterClick = this.handleFilterClick.bind(this);
     this.handlePageClick   = this.handlePageClick.bind(this);
     this.handleModalToggle = this.handleModalToggle.bind(this);
+    this.renderPokemonList = this.renderPokemonList.bind(this);
   }
 
   componentDidMount() {
@@ -38,7 +39,7 @@ class App extends Component {
   getAllPokemon(data) {
     this.props.storePokemon(data.pokemon);
     this.setState({
-      pageCount: Math.ceil(data.meta.total_count / data.meta.limit),
+      pageCount: Math.ceil(data.meta.total_count / data.meta.limit), // for pagination
       loading: false
     });
   }
@@ -57,15 +58,19 @@ class App extends Component {
     this.setState({ isModalOpen: !this.state.isModalOpen });
   }
 
-  render() {
-    const LOADER = <Loader />
-    const MODAL = <Modal onModalToggle={this.handleModalToggle} />;
+  renderPokemonList() {
+    const LOADER = <Loader />;
     const POKEMON_LIST = (
       <PokemonList
         history={this.props.history}
         location={this.props.location}
         onModalToggle={this.handleModalToggle} />
     );
+    return this.state.loading ? LOADER : POKEMON_LIST;
+  }
+
+  render() {
+    const MODAL = <Modal onModalToggle={this.handleModalToggle} />;
 
     return (
       <div className="app-wrapper">
@@ -74,7 +79,7 @@ class App extends Component {
         <div className="container">
           <CategoryList onFilterClick={this.handleFilterClick} />
           <div className="main">
-            {this.state.loading ? LOADER : POKEMON_LIST}
+            {this.renderPokemonList()}
             <Paginate
               pageCount={this.state.pageCount}
               onPageClick={this.handlePageClick} />
