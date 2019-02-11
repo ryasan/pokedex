@@ -60,11 +60,13 @@ class App extends Component {
   render() {
     const LOADER = <Loader />
     const MODAL = <Modal onModalToggle={this.handleModalToggle} />;
-    const POKEMON_LIST = <PokemonList
-      history={this.props.history}
-      location={this.props.location}
-      onModalToggle={this.handleModalToggle}
-    />
+    const POKEMON_LIST = (
+      <PokemonList
+        history={this.props.history}
+        location={this.props.location}
+        onModalToggle={this.handleModalToggle}
+      />
+    );
 
     return (
       <div className="app-wrapper">
@@ -73,11 +75,10 @@ class App extends Component {
         <div className="container">
           <CategoryList onFilterClick={this.handleFilterClick} />
           <div className="main">
-          {this.state.loading ? LOADER : POKEMON_LIST}
-          <Paginate
-            pageCount={this.state.pageCount}
-            onPageClick={this.handlePageClick}
-          />
+            {this.state.loading ? LOADER : POKEMON_LIST}
+            <Paginate
+              pageCount={this.state.pageCount}
+              onPageClick={this.handlePageClick} />
           </div>
         </div>
       </div>
