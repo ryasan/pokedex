@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import './Checkboxes.scss';
-import CheckboxItem from './CheckboxItem';
 import checkboxesHelpers from './CheckboxesHelpers';
+// components
+import CheckboxItem from './CheckboxItem';
 
-export default class Checkboxes extends Component {
+class Checkboxes extends Component {
   constructor() {
     super();
     this.state = {
@@ -20,7 +21,7 @@ export default class Checkboxes extends Component {
   }
 
   render() {
-    const categoryList = checkboxesHelpers.categories.map((title, i) => (
+    const checkboxes = checkboxesHelpers.categories.map((title, i) => (
       <CheckboxItem
         key={i}
         title={title}
@@ -29,10 +30,12 @@ export default class Checkboxes extends Component {
     ));
 
     return (
-      <div className="category-list">
+      <div className="checkboxes">
         <h3>Category</h3>
-        {categoryList}
+        {checkboxes}
       </div>
     );
   }
 }
+
+export default Checkboxes;
