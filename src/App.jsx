@@ -1,14 +1,15 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { storePokemon } from './store/actions';
 import { client } from './client';
 import AppBar from './components/AppBar/AppBar';
-import CategoryList from './components/CategoryList/CategoryList';
+import Checkboxes from './components/Checkboxes/Checkboxes';
 import PokemonList from './components/PokemonList/PokemonList';
 import Paginate from './components/Paginate/Paginate';
 import Modal from './components/Modal/Modal';
 import Loader from './components/Loader/Loader';
+
 class App extends Component {
   constructor() {
     super();
@@ -76,7 +77,7 @@ class App extends Component {
         {this.state.isModalOpen ? MODAL : ''}
         <AppBar />
         <div className="container">
-          <CategoryList onFilterClick={this.handleFilterClick} />
+          <Checkboxes onFilterClick={this.handleFilterClick} />
           <div className="main">
             {this.renderPokemonList()}
             <Paginate

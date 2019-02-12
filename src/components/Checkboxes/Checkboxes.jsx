@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import './Category.scss';
-import CategoryListItem from './CategoryListItem';
-import categoryHelpers from './CategoryListHelpers';
+import './Checkboxes.scss';
+import CheckboxItem from './CheckboxItem';
+import checkboxesHelpers from './CheckboxesHelpers';
 
-export default class CategoryList extends Component {
+export default class Checkboxes extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,8 +20,8 @@ export default class CategoryList extends Component {
   }
 
   render() {
-    const categoryList = categoryHelpers.categories.map((title, i) => (
-      <CategoryListItem
+    const categoryList = checkboxesHelpers.categories.map((title, i) => (
+      <CheckboxItem
         key={i}
         title={title}
         onCheckBoxClick={this.handleCheckBoxClick.bind(this)}

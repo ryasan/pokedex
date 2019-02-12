@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class CategoryListItem extends Component {
+export default class CheckboxItem extends Component {
   render() {
     const { title, onCheckBoxClick } = this.props;
 
