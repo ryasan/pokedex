@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+import './AppBar.scss';
 import POKE_ICON from './../../images/pokeball.svg';
 import GH_ICON from './../../images/github.svg';
-import './AppBar.scss';
 
 const AppBar = () => {
   return (
