@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({ loading: true }, () => this.loadPokemonFromServer());
+    this.setState({ loading: true }, this.loadPokemonFromServer);
   }
 
   loadPokemonFromServer() {
@@ -46,11 +46,11 @@ class App extends Component {
 
   handlePageClick({ selected }) {
     const offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ offset, loading: true }, () => this.loadPokemonFromServer());
+    this.setState({ offset, loading: true }, this.loadPokemonFromServer);
   }
 
   handleFilterClick(categories) {
-    this.setState({ loading: true, categories }, () => this.loadPokemonFromServer());
+    this.setState({ loading: true, categories }, this.loadPokemonFromServer);
   }
 
   handleModalToggle() {
