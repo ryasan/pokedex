@@ -27,7 +27,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({ loading: true }, () => this.loadPokemonFromServer());
+    this.setState({ loading: true }, this.loadPokemonFromServer);
   }
 
   loadPokemonFromServer() {
