@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+// redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { storePokemon } from './store/actions';
+// utils
 import { client } from './client';
+// components
 import AppBar from './components/AppBar/AppBar';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import PokemonList from './components/PokemonList/PokemonList';
