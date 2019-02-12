@@ -21,7 +21,7 @@ class App extends Component {
       perPage: 12,
       offset: 0,
       loading: false,
-      isModalOpen: false
+      modalIsOpen: false
     };
     this.getAllPokemon     = this.getAllPokemon.bind(this);
     this.handleFilterClick = this.handleFilterClick.bind(this);
@@ -58,7 +58,7 @@ class App extends Component {
   }
 
   handleModalToggle() {
-    this.setState({ isModalOpen: !this.state.isModalOpen });
+    this.setState({ modalIsOpen: !this.state.modalIsOpen });
   }
 
   renderPokemonList() {
@@ -77,7 +77,7 @@ class App extends Component {
 
     return (
       <div className="app-wrapper">
-        {this.state.isModalOpen ? MODAL : ''}
+        {this.state.modalIsOpen ? MODAL : ''}
         <AppBar />
         <div className="container">
           <Checkboxes onFilterClick={this.handleFilterClick} />
