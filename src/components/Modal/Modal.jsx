@@ -62,7 +62,7 @@ class Modal extends Component {
               <div className="meta">
                 <ul>
                   <li>
-                    types:&nbsp;{selectedPokemon.types
+                    types:{' '}{selectedPokemon.types
                       .map(type => type.toLowerCase())
                       .join(', ')}
                   </li>
