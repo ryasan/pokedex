@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactPaginate from 'react-paginate';
 import './Paginate.scss';
 
-export default class Paginate extends Component {
+class Paginate extends Component {
   render() {
     return (
       <ReactPaginate
@@ -24,3 +24,5 @@ export default class Paginate extends Component {
     );
   }
 }
+
+export default Paginate;

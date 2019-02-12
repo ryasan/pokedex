@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class CheckboxItem extends Component {
+class CheckboxItem extends Component {
   render() {
     const { title, onCheckBoxClick } = this.props;
 
@@ -18,3 +18,5 @@ export default class CheckboxItem extends Component {
     );
   }
 }
+
+export default CheckboxItem;
