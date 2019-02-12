@@ -1,13 +1,13 @@
 import React from 'react';
 
-const filter = url => {
+const filterShinySprites = url => {
   let regex = /\/shiny\//;
   return url && !regex.test(url);
 };
 
 const filterSprites = (sprites, name) => {
   return Object.values(sprites)
-    .filter(filter)
+    .filter(filterShinySprites)
     .map((sprite, i) => (
       <img
         className={`sprite sprite-${i + 1}`}

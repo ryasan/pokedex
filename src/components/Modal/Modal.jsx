@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './Modal.scss';
 import { client } from './../../client';
 import modalHelpers from './ModalHelpers';
+// components
 import Loader from './../Loader/Loader';
 
 class Modal extends Component {
