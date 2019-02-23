@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import './index.scss';
 // redux
 import { Provider } from 'react-redux';
-import configureStore from './store/store';
+import configureStore from './store';
 // persist on page refresh
 import { PersistGate } from 'redux-persist/integration/react';
 // components

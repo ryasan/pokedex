@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import Reveal from 'react-reveal/Reveal';
 import { storePokemonName } from './../../store/actions';
 import './Pokemon.scss';
 
@@ -14,12 +15,12 @@ class PokemonListItem extends Component {
     const { p } = this.props;
 
     return (
-      <Fragment>
+      <Reveal>
         <a className="card" onClick={this.handleClick.bind(this, p)}>
           {p.name}
           <img src={p.imageUrl} alt={`img-${p.name}`} />
         </a>
-      </Fragment>
+      </Reveal>
     );
   }
 }
