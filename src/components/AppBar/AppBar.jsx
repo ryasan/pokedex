@@ -1,18 +1,15 @@
 import React from 'react';
 import './AppBar.scss';
 
-import { GITHUB_REPO_URL } from './../../constants';
+import { Input } from './../common';
 import Icon from './../../icons';
+import { GITHUB_REPO_URL } from './../../constants';
 
 const AppBar = () => {
   return (
     <div className="app-bar">
       <Icon name="pokeball" width="50px" className="pokeball-icon" />
-      <div className="title">
-        <h2>
-          Poke<em>Dex</em>
-        </h2>
-      </div>
+      <Input type="search" placeholder="Search..."/>
       <Icon
         name="github"
         width="50px"

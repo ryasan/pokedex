@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Input } from './../common';
 
 class CheckboxItem extends Component {
   render() {
@@ -6,11 +7,9 @@ class CheckboxItem extends Component {
 
     return (
       <div className="input-group">
-        <input
+        <Input
           type="checkbox"
           id={title}
-          name={title}
-          value={title}
           onChange={e => onCheckBoxClick(title, e.target.checked)}
         />
         <label htmlFor={title}>{title}</label>
