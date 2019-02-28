@@ -1,22 +1,25 @@
 import React from 'react';
 import './AppBar.scss';
-import POKE_ICON from './../../images/pokeball.svg';
-import GH_ICON from './../../images/github.svg';
+
+import { GITHUB_REPO_URL } from './../../constants';
+import Icon from './../../icons';
 
 const AppBar = () => {
   return (
     <div className="app-bar">
-      <div className="poke-icon">
-        <img src={POKE_ICON} alt="poke" />
-      </div>
+      <Icon name="pokeball" width="50px" className="pokeball-icon" />
       <div className="title">
         <h2>
           Poke<em>Dex</em>
         </h2>
       </div>
-      <a href="https://github.com/ryasan86/pokedex">
-        <img src={GH_ICON} alt="github" className="gh-icon" />
-      </a>
+      <Icon
+        name="github"
+        width="50px"
+        className="gh-icon"
+        fill="#fff"
+        onClick={() => window.open(GITHUB_REPO_URL, '_blank')}
+      />
     </div>
   );
 };
