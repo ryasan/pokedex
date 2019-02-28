@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import CheckboxItem from './CheckboxItem';
-import checkboxesHelpers from './CheckboxesHelpers';
+import { actionCreators } from './../../actions';
 import './Checkboxes.scss';
 
 class Checkboxes extends Component {
-  state = {
-    categories: []
-  };
-
-  handleOnChange = (title, isChecked) => {
-    const { categories } = this.state;
-    isChecked
-      ? categories.push(title)
-      : categories.splice(categories.indexOf(title), 1);
-    this.props.onFilterClick(categories);
+  handleOnChange = (idx, isChecked) => {
+    const { addCategory, removeCategory } = this.props.actions;
+    isChecked ? addCategory({ idx }) : removeCategory({ idx });
+    this.props.fetchPokemon();
   };
 
   render = () => {
@@ -23,7 +18,12 @@ class Checkboxes extends Component {
       <div className="checkboxes">
         <h3>Category</h3>
         {this.props.categories.map(({ title }, i) => (
-          <CheckboxItem key={i} title={title} onChange={this.handleOnChange} />
+          <CheckboxItem
+            key={i}
+            idx={i}
+            title={title}
+            onChange={this.handleOnChange}
+          />
         ))}
       </div>
     );
@@ -32,5 +32,5 @@ class Checkboxes extends Component {
 
 export default connect(
   state => state,
-  null
+  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
 )(Checkboxes);

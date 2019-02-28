@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
-// redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actionCreators } from './actions';
-// utils
-import client from './client';
-// components
+import PropTypes from 'prop-types';
+
 import AppBar from './components/AppBar/AppBar';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import PokemonList from './components/PokemonList/PokemonList';
 import Paginate from './components/Paginate/Paginate';
 import Modal from './components/Modal/Modal';
 import Loader from './components/Loader/Loader';
+import { actionCreators } from './actions';
+import client from './client';
 
 class App extends Component {
   state = {
-    categories: [],
     perPage: 12,
     offset: 0,
     loading: false,
@@ -23,16 +21,21 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    this.setState({ loading: true }, this.loadPokemonFromServer);
+    console.log(this.props);
+    this.setState({ loading: true }, this.fetchPokemon);
   };
 
-  loadPokemonFromServer = () => {
-    const { perPage, offset, categories } = this.state;
+  fetchPokemon = () => {
+    const { perPage, offset } = this.state;
+    const categories = this.props.categories
+      .filter(({ selected }) => selected)
+      .map(({ title }) => title);
+    console.log('categories: ', categories);
     const query = { limit: perPage, offset, categories };
-    client.fetchAllPokemon(query, this.fetchAllPokemon);
+    client.fetchAllPokemon(query, this.storePokemon);
   };
 
-  fetchAllPokemon = ({ pokemon, meta }) => {
+  storePokemon = ({ pokemon, meta }) => {
     this.props.actions.storeAllPokemon({ pokemon });
     this.setState({
       pageCount: Math.ceil(meta.total_count / meta.limit), // for pagination
@@ -42,11 +45,7 @@ class App extends Component {
 
   handlePageClick = ({ selected }) => {
     const offset = Math.ceil(selected * this.state.perPage);
-    this.setState({ offset, loading: true }, this.loadPokemonFromServer);
-  };
-
-  handleFilterClick = categories => {
-    this.setState({ loading: true, categories }, this.loadPokemonFromServer);
+    this.setState({ offset, loading: true }, this.fetchPokemon);
   };
 
   handleModalToggle = () => {
@@ -73,7 +72,7 @@ class App extends Component {
         {this.state.modalIsOpen ? MODAL : ''}
         <AppBar />
         <div className="container">
-          <Checkboxes onFilterClick={this.handleFilterClick} />
+          <Checkboxes fetchPokemon={this.fetchPokemon} />
           <div className="main">
             {this.renderPokemonList()}
             <Paginate
@@ -87,7 +86,11 @@ class App extends Component {
   };
 }
 
+App.propTypes = {
+  categories: PropTypes.array
+};
+
 export default connect(
-  state => state.pokemon,
+  state => state,
   dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
 )(App);
