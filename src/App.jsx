@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 // redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { storePokemon } from './store/actions';
+import { actionCreators } from './store/actions';
 // utils
-import { client } from './client';
+import client from './client';
 // components
 import AppBar from './components/AppBar/AppBar';
 import Checkboxes from './components/Checkboxes/Checkboxes';
@@ -32,10 +32,10 @@ class App extends Component {
     client.getAllPokemon(query, this.getAllPokemon);
   };
 
-  getAllPokemon = data => {
-    this.props.storePokemon(data.pokemon);
+  getAllPokemon = ({ pokemon, meta }) => {
+    this.props.actions.storeAllPokemon({ pokemon });
     this.setState({
-      pageCount: Math.ceil(data.meta.total_count / data.meta.limit), // for pagination
+      pageCount: Math.ceil(meta.total_count / meta.limit), // for pagination
       loading: false
     });
   };
@@ -72,6 +72,7 @@ class App extends Component {
       <div className="app-wrapper">
         {this.state.modalIsOpen ? MODAL : ''}
         <AppBar />
+        <button onClick={() => console.log(this.props)}>test</button>
         <div className="container">
           <Checkboxes onFilterClick={this.handleFilterClick} />
           <div className="main">
@@ -87,18 +88,7 @@ class App extends Component {
   };
 }
 
-const mapStateToProps = state => {
-  return {
-    pokemon: state.pokemon,
-    categories: state.categories
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ storePokemon }, dispatch);
-};
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  state => state.pokemon,
+  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
 )(App);

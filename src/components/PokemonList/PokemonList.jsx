@@ -1,35 +1,34 @@
 import React, { Component, Fragment } from 'react';
-import PokemonListItem from './PokemonListItem';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import PokemonListItem from './PokemonListItem';
 
 class PokemonList extends Component {
   render = () => {
     const { pokemon, history, location, onModalToggle } = this.props;
-    const collection = pokemon.map(p => (
-      <PokemonListItem
-        key={p.id}
-        p={p}
-        history={history}
-        location={location}
-        onModalToggle={onModalToggle}
-      />
-    ));
 
     return (
       <div className="pokemon-list" align="center">
-        {collection}
+        {pokemon.map(p => (
+          <PokemonListItem
+            key={p.id}
+            pokemonItem={p}
+            history={history}
+            location={location}
+            onModalToggle={onModalToggle}
+          />
+        ))}
       </div>
     );
   };
 }
 
-const mapStateToProps = state => {
-  return {
-    pokemon: state.pokemon
-  };
+PokemonList.propTypes = {
+  pokemon: PropTypes.array
 };
 
 export default connect(
-  mapStateToProps,
+  state => state.pokemon,
   null
 )(PokemonList);

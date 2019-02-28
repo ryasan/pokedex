@@ -1,14 +1,9 @@
 import { createStore, combineReducers } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { reducer } from './reducers';
+import pokemon from './pokemonReducer';
 
-/****** store *******/
-const allReducers = combineReducers({
-  pokemon: reducer.pokemonReducer,
-  selectedPokemon: reducer.selectedPokemonReducer,
-  pokemonName: reducer.pokemonNameReducer
-});
+const allReducers = combineReducers({ pokemon });
 
 const persistConfig = {
   key: 'root',

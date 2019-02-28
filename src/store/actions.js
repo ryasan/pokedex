@@ -1,23 +1,10 @@
-/****** actions *******/
-const storePokemon = pokemon => {
-  return {
-    type: 'POKEMON',
-    payload: pokemon
-  };
-};
+import { STORE_ALL_POKEMON, SELECT_POKEMON } from './actionTypes';
+import { createAction } from './../utils';
 
-const storePokemonName = pokemonName => {
-  return {
-    type: 'POKEMON_NAME',
-    payload: pokemonName
-  };
-};
+const storeAllPokemon = payload => createAction(STORE_ALL_POKEMON, payload);
+const selectPokemon = payload => createAction(SELECT_POKEMON, payload);
 
-const storeSelectedPokemon = selectedPokemon => {
-  return {
-    type: 'SELECTED_POKEMON',
-    payload: selectedPokemon
-  };
+export const actionCreators = {
+  storeAllPokemon,
+  selectPokemon
 };
-
-export { storePokemon, storePokemonName, storeSelectedPokemon };

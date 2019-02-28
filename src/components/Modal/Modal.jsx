@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import './Modal.scss';
-import { client } from './../../client';
+import client from './../../client';
 import modalHelpers from './ModalHelpers';
 // components
 import Loader from './../Loader/Loader';
@@ -15,7 +15,7 @@ class Modal extends Component {
   componentWillMount = () => {
     this.setState(
       { loading: true },
-      client.getPokemonDetails(this.props.pokemonName, this.getDetails)
+      client.getPokemonDetails(this.props.selectedPokemon, this.getDetails)
     );
   };
 
@@ -63,7 +63,9 @@ class Modal extends Component {
                 <ul>
                   <li>
                     types:{' '}
-                    {selectedPokemon.types.map(type => type.toLowerCase()).join(', ')}
+                    {selectedPokemon.types
+                      .map(type => type.toLowerCase())
+                      .join(', ')}
                   </li>
                   <li>
                     height: {modalHelpers.roundNumber(selectedPokemon.height)} m
@@ -82,13 +84,7 @@ class Modal extends Component {
   };
 }
 
-const mapStateToProps = state => {
-  return {
-    pokemonName: state.pokemonName
-  };
-};
-
 export default connect(
-  mapStateToProps,
+  state => state.pokemon,
   null
 )(Modal);
