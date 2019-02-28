@@ -15,7 +15,7 @@ class Modal extends Component {
   componentWillMount = () => {
     this.setState(
       { loading: true },
-      client.getPokemonDetails(this.props.selectedPokemon, this.getDetails)
+      client.fetchPokemonDetails(this.props.selectedPokemon, this.getDetails)
     );
   };
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // redux
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actionCreators } from './store/actions';
+import { actionCreators } from './actions';
 // utils
 import client from './client';
 // components
@@ -29,10 +29,10 @@ class App extends Component {
   loadPokemonFromServer = () => {
     const { perPage, offset, categories } = this.state;
     const query = { limit: perPage, offset, categories };
-    client.getAllPokemon(query, this.getAllPokemon);
+    client.fetchAllPokemon(query, this.fetchAllPokemon);
   };
 
-  getAllPokemon = ({ pokemon, meta }) => {
+  fetchAllPokemon = ({ pokemon, meta }) => {
     this.props.actions.storeAllPokemon({ pokemon });
     this.setState({
       pageCount: Math.ceil(meta.total_count / meta.limit), // for pagination
@@ -72,7 +72,6 @@ class App extends Component {
       <div className="app-wrapper">
         {this.state.modalIsOpen ? MODAL : ''}
         <AppBar />
-        <button onClick={() => console.log(this.props)}>test</button>
         <div className="container">
           <Checkboxes onFilterClick={this.handleFilterClick} />
           <div className="main">

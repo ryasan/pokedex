@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { actionCreators } from './../../store/actions';
+import { actionCreators } from './../../actions';
 import './Pokemon.scss';
 
 class PokemonListItem extends Component {

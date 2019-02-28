@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './Checkboxes.scss';
-import checkboxesHelpers from './CheckboxesHelpers';
-// components
+import { connect } from 'react-redux';
+
 import CheckboxItem from './CheckboxItem';
+import checkboxesHelpers from './CheckboxesHelpers';
+import './Checkboxes.scss';
 
 class Checkboxes extends Component {
   state = {
@@ -18,21 +19,18 @@ class Checkboxes extends Component {
   };
 
   render = () => {
-    const checkboxes = checkboxesHelpers.categories.map((title, i) => (
-      <CheckboxItem
-        key={i}
-        title={title}
-        onChange={this.handleOnChange}
-      />
-    ));
-
     return (
       <div className="checkboxes">
         <h3>Category</h3>
-        {checkboxes}
+        {this.props.categories.map(({ title }, i) => (
+          <CheckboxItem key={i} title={title} onChange={this.handleOnChange} />
+        ))}
       </div>
     );
   };
 }
 
-export default Checkboxes;
+export default connect(
+  state => state,
+  null
+)(Checkboxes);

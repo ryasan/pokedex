@@ -1,11 +1,11 @@
-import { STORE_ALL_POKEMON, SELECT_POKEMON } from './actionTypes';
+import { STORE_ALL_POKEMON, SELECT_POKEMON } from './../actions/actionTypes';
 
-const INITIAL_STATE = {
+const defaultState = {
   pokemon: [],
   selectedPokemon: ''
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = defaultState, action) => {
   const { type, payload } = action;
   switch (type) {
     case STORE_ALL_POKEMON:
