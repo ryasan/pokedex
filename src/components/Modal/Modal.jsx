@@ -8,7 +8,7 @@ import Loader from './../Loader/Loader';
 
 class Modal extends Component {
   state = {
-    selectedPokemon: {},
+    pokemonDetails: {},
     loading: false
   };
 
@@ -20,11 +20,11 @@ class Modal extends Component {
   };
 
   getDetails = data => {
-    this.setState({ selectedPokemon: data, loading: false });
+    this.setState({ pokemonDetails: data, loading: false });
   };
 
   render = () => {
-    const { loading, selectedPokemon } = this.state;
+    const { loading, pokemonDetails } = this.state;
     if (loading) {
       return (
         <div className="modal-wrapper">
@@ -34,8 +34,8 @@ class Modal extends Component {
     }
 
     const sprites = modalHelpers.filterSprites(
-      selectedPokemon.sprites,
-      selectedPokemon.name
+      pokemonDetails.sprites,
+      pokemonDetails.name
     );
 
     return (
@@ -46,14 +46,14 @@ class Modal extends Component {
             <div className="content col-1">
               <div className="title">
                 <h2>
-                  #{selectedPokemon.id} {selectedPokemon.name}
+                  #{pokemonDetails.id} {pokemonDetails.name}
                 </h2>
               </div>
               <div className="image-grid">
                 <img
                   className="main-image"
-                  src={selectedPokemon.imageUrl}
-                  alt={`img-${selectedPokemon.name}`}
+                  src={pokemonDetails.imageUrl}
+                  alt={`img-${pokemonDetails.name}`}
                 />
                 {sprites}
               </div>
@@ -63,15 +63,15 @@ class Modal extends Component {
                 <ul>
                   <li>
                     types:{' '}
-                    {selectedPokemon.types
+                    {pokemonDetails.types
                       .map(type => type.toLowerCase())
                       .join(', ')}
                   </li>
                   <li>
-                    height: {modalHelpers.roundNumber(selectedPokemon.height)} m
+                    height: {modalHelpers.roundNumber(pokemonDetails.height)} m
                   </li>
                   <li>
-                    weight: {modalHelpers.roundNumber(selectedPokemon.weight)}{' '}
+                    weight: {modalHelpers.roundNumber(pokemonDetails.weight)}{' '}
                     kg
                   </li>
                 </ul>
