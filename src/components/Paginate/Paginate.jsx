@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate';
 import './Paginate.scss';
 
 class Paginate extends Component {
-  render() {
+  render = () => {
     return (
       <ReactPaginate
         previousLabel="previous"
@@ -22,7 +22,7 @@ class Paginate extends Component {
         activeClassName="active"
       />
     );
-  }
+  };
 }
 
 export default Paginate;

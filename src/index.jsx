@@ -12,11 +12,11 @@ import App from './App';
 const store = configureStore().store;
 const persistor = configureStore().persistor;
 
-const WRAPPED_APP = (
+render(
   <Provider store={store}>
     <PersistGate persistor={persistor}>
       <App />
     </PersistGate>
-  </Provider>
+  </Provider>,
+  document.getElementById('root')
 );
-render(WRAPPED_APP, document.getElementById('root'));

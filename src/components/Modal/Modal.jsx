@@ -7,26 +7,23 @@ import modalHelpers from './ModalHelpers';
 import Loader from './../Loader/Loader';
 
 class Modal extends Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedPokemon: {},
-      loading: false
-    };
-  }
+  state = {
+    selectedPokemon: {},
+    loading: false
+  };
 
-  componentWillMount() {
+  componentWillMount = () => {
     this.setState(
       { loading: true },
-      client.getPokemonDetails(this.props.pokemonName, this.getDetails.bind(this))
+      client.getPokemonDetails(this.props.pokemonName, this.getDetails)
     );
-  }
+  };
 
-  getDetails(data) {
+  getDetails = data => {
     this.setState({ selectedPokemon: data, loading: false });
-  }
+  };
 
-  render() {
+  render = () => {
     const { loading, selectedPokemon } = this.state;
     if (loading) {
       return (
@@ -36,7 +33,10 @@ class Modal extends Component {
       );
     }
 
-    const sprites = modalHelpers.filterSprites(selectedPokemon.sprites, selectedPokemon.name)
+    const sprites = modalHelpers.filterSprites(
+      selectedPokemon.sprites,
+      selectedPokemon.name
+    );
 
     return (
       <Fragment>
@@ -62,12 +62,16 @@ class Modal extends Component {
               <div className="meta">
                 <ul>
                   <li>
-                    types:{' '}{selectedPokemon.types
-                      .map(type => type.toLowerCase())
-                      .join(', ')}
+                    types:{' '}
+                    {selectedPokemon.types.map(type => type.toLowerCase()).join(', ')}
                   </li>
-                  <li>height: {modalHelpers.roundNumber(selectedPokemon.height)} m</li>
-                  <li>weight: {modalHelpers.roundNumber(selectedPokemon.weight)} kg</li>
+                  <li>
+                    height: {modalHelpers.roundNumber(selectedPokemon.height)} m
+                  </li>
+                  <li>
+                    weight: {modalHelpers.roundNumber(selectedPokemon.weight)}{' '}
+                    kg
+                  </li>
                 </ul>
               </div>
             </div>
@@ -75,7 +79,7 @@ class Modal extends Component {
         </div>
       </Fragment>
     );
-  }
+  };
 }
 
 const mapStateToProps = state => {
@@ -84,4 +88,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(Modal);
+export default connect(
+  mapStateToProps,
+  null
+)(Modal);

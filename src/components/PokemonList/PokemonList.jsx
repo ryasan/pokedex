@@ -3,7 +3,7 @@ import PokemonListItem from './PokemonListItem';
 import { connect } from 'react-redux';
 
 class PokemonList extends Component {
-  render() {
+  render = () => {
     const { pokemon, history, location, onModalToggle } = this.props;
     const collection = pokemon.map(p => (
       <PokemonListItem
@@ -20,7 +20,7 @@ class PokemonList extends Component {
         {collection}
       </div>
     );
-  }
+  };
 }
 
 const mapStateToProps = state => {
@@ -29,4 +29,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, null)(PokemonList); 
+export default connect(
+  mapStateToProps,
+  null
+)(PokemonList);

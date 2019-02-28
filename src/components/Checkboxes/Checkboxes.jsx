@@ -5,27 +5,24 @@ import checkboxesHelpers from './CheckboxesHelpers';
 import CheckboxItem from './CheckboxItem';
 
 class Checkboxes extends Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: []
-    };
-  }
+  state = {
+    categories: []
+  };
 
-  handleCheckBoxClick(title, isChecked) {
+  handleOnChange = (title, isChecked) => {
     const { categories } = this.state;
     isChecked
       ? categories.push(title)
       : categories.splice(categories.indexOf(title), 1);
     this.props.onFilterClick(categories);
-  }
+  };
 
-  render() {
+  render = () => {
     const checkboxes = checkboxesHelpers.categories.map((title, i) => (
       <CheckboxItem
         key={i}
         title={title}
-        onCheckBoxClick={this.handleCheckBoxClick.bind(this)}
+        onChange={this.handleOnChange}
       />
     ));
 
@@ -35,7 +32,7 @@ class Checkboxes extends Component {
         {checkboxes}
       </div>
     );
-  }
+  };
 }
 
 export default Checkboxes;
