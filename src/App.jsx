@@ -14,65 +14,58 @@ import Modal from './components/Modal/Modal';
 import Loader from './components/Loader/Loader';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: [],
-      perPage: 12,
-      offset: 0,
-      loading: false,
-      modalIsOpen: false
-    };
-    this.getAllPokemon     = this.getAllPokemon.bind(this);
-    this.handleFilterClick = this.handleFilterClick.bind(this);
-    this.handlePageClick   = this.handlePageClick.bind(this);
-    this.handleModalToggle = this.handleModalToggle.bind(this);
-    this.renderPokemonList = this.renderPokemonList.bind(this);
-  }
+  state = {
+    categories: [],
+    perPage: 12,
+    offset: 0,
+    loading: false,
+    modalIsOpen: false
+  };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ loading: true }, this.loadPokemonFromServer);
-  }
+  };
 
-  loadPokemonFromServer() {
+  loadPokemonFromServer = () => {
     const { perPage, offset, categories } = this.state;
     const query = { limit: perPage, offset, categories };
     client.getAllPokemon(query, this.getAllPokemon);
-  }
+  };
 
-  getAllPokemon(data) {
+  getAllPokemon = data => {
     this.props.storePokemon(data.pokemon);
     this.setState({
       pageCount: Math.ceil(data.meta.total_count / data.meta.limit), // for pagination
       loading: false
     });
-  }
+  };
 
-  handlePageClick({ selected }) {
+  handlePageClick = ({ selected }) => {
     const offset = Math.ceil(selected * this.state.perPage);
     this.setState({ offset, loading: true }, this.loadPokemonFromServer);
-  }
+  };
 
-  handleFilterClick(categories) {
+  handleFilterClick = categories => {
     this.setState({ loading: true, categories }, this.loadPokemonFromServer);
-  }
+  };
 
-  handleModalToggle() {
+  handleModalToggle = () => {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
-  }
+  };
 
-  renderPokemonList() {
+  renderPokemonList = () => {
     const LOADER = <Loader />;
     const POKEMON_LIST = (
       <PokemonList
         history={this.props.history}
         location={this.props.location}
-        onModalToggle={this.handleModalToggle} />
+        onModalToggle={this.handleModalToggle}
+      />
     );
     return this.state.loading ? LOADER : POKEMON_LIST;
-  }
+  };
 
-  render() {
+  render = () => {
     const MODAL = <Modal onModalToggle={this.handleModalToggle} />;
 
     return (
@@ -85,12 +78,13 @@ class App extends Component {
             {this.renderPokemonList()}
             <Paginate
               pageCount={this.state.pageCount}
-              onPageClick={this.handlePageClick} />
+              onPageClick={this.handlePageClick}
+            />
           </div>
         </div>
       </div>
     );
-  }
+  };
 }
 
 const mapStateToProps = state => {
@@ -104,4 +98,7 @@ const mapDispatchToProps = dispatch => {
   return bindActionCreators({ storePokemon }, dispatch);
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

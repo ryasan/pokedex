@@ -10,10 +10,7 @@ module.exports = {
       {
         test: /\.js[x]?/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['react', 'env']
-        }
+        loader: 'babel-loader'
       },
       {
         test: /\.scss$/,
