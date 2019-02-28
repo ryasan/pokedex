@@ -21,7 +21,6 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    console.log(this.props);
     this.setState({ loading: true }, this.fetchPokemon);
   };
 
@@ -30,8 +29,8 @@ class App extends Component {
     const categories = this.props.categories
       .filter(({ selected }) => selected)
       .map(({ title }) => title);
-    console.log('categories: ', categories);
     const query = { limit: perPage, offset, categories };
+
     client.fetchAllPokemon(query, this.storePokemon);
   };
 

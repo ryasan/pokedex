@@ -7,9 +7,9 @@ import { actionCreators } from './../../actions';
 import './Checkboxes.scss';
 
 class Checkboxes extends Component {
-  handleOnChange = (idx, isChecked) => {
+  handleOnChange = async (idx, isChecked) => {
     const { addCategory, removeCategory } = this.props.actions;
-    isChecked ? addCategory({ idx }) : removeCategory({ idx });
+    await (isChecked ? addCategory({ idx }) : removeCategory({ idx }));
     this.props.fetchPokemon();
   };
 
