@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import CheckboxItem from './CheckboxItem';
-import { actionCreators } from './../../actions';
+import { actionCreators } from './../../redux/actions';
 import './Checkboxes.scss';
 
 class Checkboxes extends Component {

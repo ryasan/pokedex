@@ -9,7 +9,7 @@ import PokemonList from './components/PokemonList/PokemonList';
 import Paginate from './components/Paginate/Paginate';
 import Modal from './components/Modal/Modal';
 import Loader from './components/Loader/Loader';
-import { actionCreators } from './actions';
+import { actionCreators } from './redux/actions';
 import client from './client';
 import { ITEMS_PER_PAGE } from './constants';
 

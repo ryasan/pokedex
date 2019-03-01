@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Icon from './../../icons';
 import { Input } from './../common';
 import { GITHUB_REPO_URL } from './../../constants';
-import { actionCreators } from './../../actions';
+import { actionCreators } from './../../redux/actions';
 import './AppBar.scss';
 
 class AppBar extends Component {

@@ -5,7 +5,7 @@ import {
   REMOVE_CATEGORY,
   SEARCH_TERM
 } from './actionTypes';
-import { createAction } from '../utils';
+import { createAction } from './../../utils';
 
 const storeAllPokemon = payload => createAction(STORE_ALL_POKEMON, payload);
 const selectPokemon   = payload => createAction(SELECT_POKEMON, payload);
