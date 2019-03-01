@@ -1,32 +1,30 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import './Modal.scss';
-import { client } from './../../client';
+import client from './../../client';
 import modalHelpers from './ModalHelpers';
+// components
 import Loader from './../Loader/Loader';
 
 class Modal extends Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedPokemon: {},
-      loading: false
-    };
-  }
+  state = {
+    pokemonDetails: {},
+    loading: false
+  };
 
-  componentWillMount() {
+  componentWillMount = () => {
     this.setState(
       { loading: true },
-      client.getPokemonDetails(this.props.pokemonName, this.getDetails.bind(this))
+      client.fetchPokemonDetails(this.props.selectedPokemon, this.getDetails)
     );
-  }
+  };
 
-  getDetails(data) {
-    this.setState({ selectedPokemon: data, loading: false });
-  }
+  getDetails = data => {
+    this.setState({ pokemonDetails: data, loading: false });
+  };
 
-  render() {
-    const { loading, selectedPokemon } = this.state;
+  render = () => {
+    const { loading, pokemonDetails } = this.state;
     if (loading) {
       return (
         <div className="modal-wrapper">
@@ -35,7 +33,10 @@ class Modal extends Component {
       );
     }
 
-    const sprites = modalHelpers.filterSprites(selectedPokemon.sprites, selectedPokemon.name)
+    const sprites = modalHelpers.filterSprites(
+      pokemonDetails.sprites,
+      pokemonDetails.name
+    );
 
     return (
       <Fragment>
@@ -45,14 +46,14 @@ class Modal extends Component {
             <div className="content col-1">
               <div className="title">
                 <h2>
-                  #{selectedPokemon.id} {selectedPokemon.name}
+                  #{pokemonDetails.id} {pokemonDetails.name}
                 </h2>
               </div>
               <div className="image-grid">
                 <img
                   className="main-image"
-                  src={selectedPokemon.imageUrl}
-                  alt={`img-${selectedPokemon.name}`}
+                  src={pokemonDetails.imageUrl}
+                  alt={`img-${pokemonDetails.name}`}
                 />
                 {sprites}
               </div>
@@ -61,12 +62,18 @@ class Modal extends Component {
               <div className="meta">
                 <ul>
                   <li>
-                    types:&nbsp;{selectedPokemon.types
+                    types:{' '}
+                    {pokemonDetails.types
                       .map(type => type.toLowerCase())
                       .join(', ')}
                   </li>
-                  <li>height: {modalHelpers.roundNumber(selectedPokemon.height)} m</li>
-                  <li>weight: {modalHelpers.roundNumber(selectedPokemon.weight)} kg</li>
+                  <li>
+                    height: {modalHelpers.roundNumber(pokemonDetails.height)} m
+                  </li>
+                  <li>
+                    weight: {modalHelpers.roundNumber(pokemonDetails.weight)}{' '}
+                    kg
+                  </li>
                 </ul>
               </div>
             </div>
@@ -74,13 +81,10 @@ class Modal extends Component {
         </div>
       </Fragment>
     );
-  }
+  };
 }
 
-const mapStateToProps = state => {
-  return {
-    pokemonName: state.pokemonName
-  };
-};
-
-export default connect(mapStateToProps, null)(Modal);
+export default connect(
+  state => state.pokemon,
+  null
+)(Modal);

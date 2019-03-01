@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
-import POKE_ICON from './../../images/pokeball.svg';
-import GH_ICON from './../../images/github.svg';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import Icon from './../../icons';
+import { Input } from './../common';
+import { GITHUB_REPO_URL } from './../../constants';
+import { actionCreators } from './../../actions';
 import './AppBar.scss';
 
-const AppBar = () => {
-  return (
+class AppBar extends Component {
+  handleChange = async e => {
+    await this.props.actions.searchTerm({ term: e.target.value });
+    this.props.fetchPokemon()
+  };
+
+  render = () => (
     <div className="app-bar">
-      <div className="poke-icon">
-        <img src={POKE_ICON} alt="poke" />
-      </div>
-      <div className="title">
-        <h2>
-          Poke<em>Dex</em>
-        </h2>
-      </div>
-      <a href="https://github.com/ryasan86/pokedex">
-        <img src={GH_ICON} alt="github" className="gh-icon" />
-      </a>
+      <Icon name="pokeball" width="50px" className="pokeball-icon" />
+      <Input
+        type="search"
+        placeholder="Search..."
+        onChange={this.handleChange}
+      />
+      <Icon
+        name="github"
+        width="50px"
+        className="gh-icon"
+        fill="#fff"
+        onClick={() => window.open(GITHUB_REPO_URL, '_blank')}
+      />
     </div>
   );
-};
+}
 
-export default AppBar;
+export default connect(
+  null,
+  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
+)(AppBar);

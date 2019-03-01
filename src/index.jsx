@@ -1,19 +1,16 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import './index.scss';
-import configureStore from './store/store';
+
 import App from './App';
+import store from './reducers';
+import './index.scss';
 
-const store = configureStore().store;
-const persistor = configureStore().persistor;
 
-const WRAPPED_APP = (
+
+render(
   <Provider store={store}>
-    <PersistGate persistor={persistor}>
       <App />
-    </PersistGate>
-  </Provider>
+  </Provider>,
+  document.getElementById('root')
 );
-render(WRAPPED_APP, document.getElementById('root'));

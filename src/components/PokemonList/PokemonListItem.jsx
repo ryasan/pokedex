@@ -1,32 +1,29 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { storePokemonName } from './../../store/actions';
+
+import { actionCreators } from './../../actions';
 import './Pokemon.scss';
 
 class PokemonListItem extends Component {
-  handleClick(p) {
-    this.props.storePokemonName(p.name);
+  handleClick = selectedPokemon => {
+    this.props.actions.selectPokemon({ selectedPokemon });
     this.props.onModalToggle();
-  }
+  };
 
-  render() {
-    const { p } = this.props;
-    const category = p.types[0].toLowerCase();
+  render = () => {
+    const { pokemonItem } = this.props;
 
     return (
-      <Fragment>
-        <a className="card" onClick={this.handleClick.bind(this, p)}>
-          {p.name}
-          <img src={p.imageUrl} alt={`img-${p.name}`} />
-        </a>
-      </Fragment>
+      <a className="card" onClick={() => this.handleClick(pokemonItem.name)}>
+        {pokemonItem.name}
+        <img src={pokemonItem.imageUrl} alt={`img-${pokemonItem.name}`} />
+      </a>
     );
-  }
+  };
 }
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators({ storePokemonName }, dispatch);
-};
-
-export default connect(null, mapDispatchToProps)(PokemonListItem);
+export default connect(
+  null,
+  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
+)(PokemonListItem);

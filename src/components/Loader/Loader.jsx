@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Loader.scss';
 
-const Loader = () => {
-  return <div className="loader" />
-};
+const Loader = () => <div className="loader" />;
 
 export default Loader;

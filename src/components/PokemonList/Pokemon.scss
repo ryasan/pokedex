@@ -1,9 +1,9 @@
 @import './../../_variables.scss';
 
 .pokemon-list {
-  width: $width_very_large;
   .card {
     color: $normal_text;
+    background: $white;
     position: relative;
     margin: 1rem 0.6rem;
     display: inline-block;
@@ -15,6 +15,7 @@
     border: transparentize($primary, 0.6) 1px solid;
     box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
+    transition: all 0.5s;
     img {
       display: block;
       position: relative;
@@ -28,24 +29,10 @@
       background-repeat: no-repeat;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      transition: width 0.2s ease-out, height 0.2s ease-out, top 0.2s ease-out,
-        left 0.2s ease-out;
     }
-
     &:hover {
-      animation: none;
-      z-index: 100;
-
-      img {
-        $width_large: 18rem;
-        width: $width_large;
-        height: calc(1.4 * #{$width_large});
-        position: relative;
-        top: calc(
-          (-1 * (1.4 * #{$width_large}) / 2) + ((1.4 * #{$width_normal}) / 2)
-        );
-        left: calc((-1 * #{$width_large} / 2) + (#{$width_normal} / 2));
-      }
+      transform: scale(1.2);
+      z-index: 10;
     }
   }
 }
