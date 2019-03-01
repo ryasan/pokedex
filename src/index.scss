@@ -24,11 +24,20 @@ body {
 }
 
 .container {
+<<<<<<< HEAD
+=======
+  font-family: 'PT Sans', sans-serif;
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 8fr 1fr;
   grid-template-areas:
+<<<<<<< HEAD
     'checkboxes main .';
+=======
+    'bread-crumbs bread-crumbs bread-crumbs'
+    'category-list main .';
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
 }
 
 .main {

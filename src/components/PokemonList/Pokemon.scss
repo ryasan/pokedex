@@ -1,6 +1,10 @@
 @import './../../_variables.scss';
 
 .pokemon-list {
+<<<<<<< HEAD
+=======
+  // width: $width_very_large;
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
   .card {
     color: $normal_text;
     background: $white;
@@ -29,6 +33,11 @@
       background-repeat: no-repeat;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
+<<<<<<< HEAD
+=======
+      // transition: width 0.2s ease-out, height 0.2s ease-out, top 0.2s ease-out,
+      //   left 0.2s ease-out;
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
     }
     &:hover {
       transform: scale(1.2);

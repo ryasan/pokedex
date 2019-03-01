@@ -11,8 +11,13 @@ class PokemonListItem extends Component {
     this.props.onModalToggle();
   };
 
+<<<<<<< HEAD
   render = () => {
     const { pokemonItem } = this.props;
+=======
+  render() {
+    const { p } = this.props;
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
 
     return (
       <a className="card" onClick={() => this.handleClick(pokemonItem.name)}>

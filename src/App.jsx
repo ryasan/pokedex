@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import PropTypes from 'prop-types';
 
+=======
+import { storePokemon } from './store/actions';
+import { client } from './client';
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
 import AppBar from './components/AppBar/AppBar';
 import Checkboxes from './components/Checkboxes/Checkboxes';
 import PokemonList from './components/PokemonList/PokemonList';

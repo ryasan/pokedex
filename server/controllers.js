@@ -7,6 +7,7 @@ const getPaginatedItems = (items, offset) => {
   return items.slice(offset, offset + PER_PAGE);
 };
 
+<<<<<<< HEAD
 const filtered = (pokemon, categories, searchTerm) => {
   return pokemon
     .filter(p => {
@@ -17,11 +18,23 @@ const filtered = (pokemon, categories, searchTerm) => {
     .filter(p => {
       return new RegExp(searchTerm, 'gi').test(p.name);
     });
+=======
+const filtered = (pokemon, categories) => {
+  return pokemon.filter(p => {
+    return categories.some(category => {
+      return p.types.indexOf(category) !== -1;
+    });
+  });
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
 };
 
 const findOne = (pokemon, name) => {
   return pokemon.find(p => p.name === name);
+<<<<<<< HEAD
 };
+=======
+}
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
 
 module.exports = {
   getPokemon(req, res) {
@@ -64,3 +77,7 @@ module.exports = {
     res.json(json);
   }
 };
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0b9be8b48ffe49a9e2eaebb952b29d61ba61f882
