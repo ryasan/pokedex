@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import PokemonListItem from './PokemonListItem';
 
 class PokemonList extends Component {
+  
   render = () => {
-    const { pokemon, history, location, onModalToggle } = this.props;
+    const { pokemon, onModalToggle } = this.props;
 
     return (
       <div className="pokemon-list" align="center">
@@ -14,8 +15,6 @@ class PokemonList extends Component {
           <PokemonListItem
             key={p.id}
             pokemonItem={p}
-            history={history}
-            location={location}
             onModalToggle={onModalToggle}
           />
         ))}

@@ -11,11 +11,12 @@ import Modal from './components/Modal/Modal';
 import Loader from './components/Loader/Loader';
 import { actionCreators } from './actions';
 import client from './client';
+import { ITEMS_PER_PAGE } from './constants';
 
 class App extends Component {
   state = {
-    perPage: 12,
     offset: 0,
+    pageCount: 0,
     loading: false,
     modalIsOpen: false
   };
@@ -25,12 +26,12 @@ class App extends Component {
   };
 
   fetchPokemon = () => {
-    const { perPage, offset } = this.state;
+    const { offset } = this.state;
     const { search } = this.props;
     const categories = this.props.categories
       .filter(({ selected }) => selected)
       .map(({ title }) => title);
-    const query = { limit: perPage, offset, categories, search };
+    const query = { limit: ITEMS_PER_PAGE, offset, categories, search };
 
     client.fetchPokemon(query, this.storePokemon);
   };
@@ -44,39 +45,27 @@ class App extends Component {
   };
 
   handlePageClick = ({ selected }) => {
-    const offset = Math.ceil(selected * this.state.perPage);
+    const offset = Math.ceil(selected * ITEMS_PER_PAGE);
     this.setState({ offset, loading: true }, this.fetchPokemon);
   };
 
-  handleModalToggle = () => {
+  toggleModal = () => {
     this.setState({ modalIsOpen: !this.state.modalIsOpen });
   };
 
-  renderPokemonList = () => {
-    const LOADER = <Loader />;
-    const POKEMON_LIST = (
-      <PokemonList
-        history={this.props.history}
-        location={this.props.location}
-        onModalToggle={this.handleModalToggle}
-      />
-    );
-    return this.state.loading ? LOADER : POKEMON_LIST;
-  };
-
   render = () => {
-    const MODAL = <Modal onModalToggle={this.handleModalToggle} />;
+    const { modalIsOpen, loading, pageCount } = this.state;
 
     return (
       <div className="app-wrapper">
-        {this.state.modalIsOpen ? MODAL : ''}
+        {modalIsOpen ? <Modal onModalToggle={this.handleModalToggle} /> : ''}
         <AppBar fetchPokemon={this.fetchPokemon} />
         <div className="container">
           <Checkboxes fetchPokemon={this.fetchPokemon} />
           <div className="main">
-            {this.renderPokemonList()}
+            {loading ? <Loader /> : <PokemonList toggleModal={this.toggleModal} />}
             <Paginate
-              pageCount={this.state.pageCount}
+              pageCount={pageCount}
               onPageClick={this.handlePageClick}
             />
           </div>
