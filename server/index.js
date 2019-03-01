@@ -13,7 +13,7 @@ const port   = process.env.PORT || 1128;
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.resolve(__dirname, './../public')));
+app.use(express.static(path.resolve(__dirname, './../client/public')));
 app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.setHeader('Pragma', 'no-cache');
@@ -26,7 +26,7 @@ app.use(router);
 
 // default route *when refreshing page
 app.use('*', (err, res) => {
-  res.sendFile(path.resolve(__dirname, './../public', 'index.html'));
+  res.sendFile(path.resolve(__dirname, './../client/public', 'index.html'));
 });
 
 http.listen(port, () => console.log(`server is listening on port: ${port}`));
