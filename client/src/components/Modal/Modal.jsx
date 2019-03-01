@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import './Modal.scss';
-import client from './../../client';
-import modalHelpers from './ModalHelpers';
-// components
+
 import Loader from './../Loader/Loader';
+import client from './../../client';
+import { roundNumber } from "./../../utils";
+import './Modal.scss';
 
 class Modal extends Component {
   state = {
@@ -68,10 +68,10 @@ class Modal extends Component {
                       .join(', ')}
                   </li>
                   <li>
-                    height: {modalHelpers.roundNumber(pokemonDetails.height)} m
+                    height: {roundNumber(pokemonDetails.height)} m
                   </li>
                   <li>
-                    weight: {modalHelpers.roundNumber(pokemonDetails.weight)} kg
+                    weight: {roundNumber(pokemonDetails.weight)} kg
                   </li>
                 </ul>
               </div>

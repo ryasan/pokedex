@@ -18,8 +18,4 @@ const filterSprites = (sprites, name) => {
     ));
 };
 
-const roundNumber = num => {
-  return (num * 100) / 1000;
-};
-
-export default { filterSprites, roundNumber };
+export default { filterSprites };
