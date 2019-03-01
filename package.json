@@ -4,10 +4,9 @@
   "description": "pokemon lookup app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start:all": "concurrently \"yarn server\" \"yarn client\"",
     "server": "nodemon ./server -e js",
-    "client": "webpack -w --mode development",
+    "client": "webpack-dev-server --inline --hot",
     "build": "webpack --mode production"
   },
   "repository": {
@@ -50,6 +49,7 @@
     "sass-loader": "^7.0.1",
     "style-loader": "^0.21.0",
     "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3"
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
   }
 }
