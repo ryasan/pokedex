@@ -6,11 +6,9 @@ import App from './App';
 import store from './reducers';
 import './index.scss';
 
-
-
 render(
   <Provider store={store}>
-      <App />
+    <App />
   </Provider>,
   document.getElementById('root')
 );
