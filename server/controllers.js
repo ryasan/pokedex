@@ -7,12 +7,16 @@ const getPaginatedItems = (items, offset) => {
   return items.slice(offset, offset + PER_PAGE);
 };
 
-const filtered = (pokemon, categories) => {
-  return pokemon.filter(p => {
-    return categories.some(category => {
-      return p.types.indexOf(category) !== -1;
+const filtered = (pokemon, categories, searchTerm) => {
+  return pokemon
+    .filter(p => {
+      return categories.some(category => {
+        return p.types.indexOf(category) !== -1 || !category;
+      });
+    })
+    .filter(p => {
+      return new RegExp(searchTerm, 'gi').test(p.name);
     });
-  });
 };
 
 const findOne = (pokemon, name) => {
@@ -22,17 +26,23 @@ const findOne = (pokemon, name) => {
 module.exports = {
   getPokemon(req, res) {
     const categories     = req.query.categories.split(',');
+    const searchTerm     = req.query.searchTerm;
     const offset         = req.query.offset ? parseInt(req.query.offset, 10) : 0;
     const nextOffSet     = offset + PER_PAGE;
     const previousOffSet = offset - PER_PAGE < 1 ? 0 : offset - PER_PAGE;
-    let   pokemon        = JSON.parse(fs.readFileSync(DATA_FILE));
 
-    pokemon = pokemon.map(p => {
-      return { id: p.id, name: p.name, types: p.types, imageUrl: p.imageUrl };
-    });
+    // map relevant properties from pokemon json file
+    let pokemon = JSON.parse(fs.readFileSync(DATA_FILE)).map(p => ({
+      id: p.id,
+      name: p.name,
+      types: p.types,
+      imageUrl: p.imageUrl
+    }));
 
-    if (categories[0]) pokemon = filtered(pokemon, categories);
+    // filter pokemon by category and search term
+    pokemon = filtered(pokemon, categories, searchTerm);
 
+    // info for pagination
     const meta = {
       limit: PER_PAGE,
       next: `?limit=${PER_PAGE}&offset=${nextOffSet}`,
@@ -41,13 +51,8 @@ module.exports = {
       total_count: pokemon.length
     };
 
-    const json = {
-      pokemon: getPaginatedItems(pokemon, offset),
-      meta: meta
-    };
-
     res.setHeader('Cache-Control', 'no-cache');
-    res.json(json);
+    res.json({ pokemon: getPaginatedItems(pokemon, offset), meta: meta });
   },
   getOnePokemon(req, res) {
     const json = findOne(

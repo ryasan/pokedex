@@ -26,12 +26,13 @@ class App extends Component {
 
   fetchPokemon = () => {
     const { perPage, offset } = this.state;
+    const { search } = this.props;
     const categories = this.props.categories
       .filter(({ selected }) => selected)
       .map(({ title }) => title);
-    const query = { limit: perPage, offset, categories };
+    const query = { limit: perPage, offset, categories, search };
 
-    client.fetchAllPokemon(query, this.storePokemon);
+    client.fetchPokemon(query, this.storePokemon);
   };
 
   storePokemon = ({ pokemon, meta }) => {
@@ -69,7 +70,7 @@ class App extends Component {
     return (
       <div className="app-wrapper">
         {this.state.modalIsOpen ? MODAL : ''}
-        <AppBar />
+        <AppBar fetchPokemon={this.fetchPokemon} />
         <div className="container">
           <Checkboxes fetchPokemon={this.fetchPokemon} />
           <div className="main">

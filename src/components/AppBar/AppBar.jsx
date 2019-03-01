@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import Icon from './../../icons';
+import { Input } from './../common';
+import { GITHUB_REPO_URL } from './../../constants';
+import { actionCreators } from './../../actions';
 import './AppBar.scss';
 
-import { Input } from './../common';
-import Icon from './../../icons';
-import { GITHUB_REPO_URL } from './../../constants';
-
 class AppBar extends Component {
-  handleChange = e => {};
+  handleChange = async e => {
+    await this.props.actions.searchTerm({ term: e.target.value });
+    this.props.fetchPokemon()
+  };
 
   render = () => (
     <div className="app-bar">
@@ -27,4 +33,7 @@ class AppBar extends Component {
   );
 }
 
-export default AppBar;
+export default connect(
+  null,
+  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
+)(AppBar);

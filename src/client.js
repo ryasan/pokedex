@@ -1,7 +1,7 @@
 export default {
-  fetchAllPokemon(query, success) {
+  fetchPokemon({ limit, offset, categories, search }, success) {
     fetch(
-      `/api/pokemon?limit=${query.limit}&offset=${query.offset}&categories=${query.categories}`,
+      `/api/pokemon?limit=${limit}&offset=${offset}&categories=${categories}&searchTerm=${search}`,
       { headers: { Accept: 'application/json' } }
     )
       .then(checkStatus)
@@ -9,9 +9,9 @@ export default {
       .then(success);
   },
   fetchPokemonDetails(title, success) {
-    fetch(`/api/details?title=${title}`, 
-    { headers: { Accept: 'application/json' } }
-    )
+    fetch(`/api/details?title=${title}`, {
+      headers: { Accept: 'application/json' }
+    })
       .then(checkStatus)
       .then(parseJSON)
       .then(success);
