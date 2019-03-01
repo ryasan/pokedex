@@ -28,7 +28,7 @@ class Modal extends Component {
     if (loading) {
       return (
         <div className="modal-wrapper">
-          <Loader />;
+          <Loader />
         </div>
       );
     }
@@ -71,8 +71,7 @@ class Modal extends Component {
                     height: {modalHelpers.roundNumber(pokemonDetails.height)} m
                   </li>
                   <li>
-                    weight: {modalHelpers.roundNumber(pokemonDetails.weight)}{' '}
-                    kg
+                    weight: {modalHelpers.roundNumber(pokemonDetails.weight)} kg
                   </li>
                 </ul>
               </div>
