@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import Icon from './../../icons';
+import Icon from './../Icons';
 import { Input } from './../common';
 import { GITHUB_REPO_URL } from './../../constants';
 import { actionCreators } from './../../redux/actions';
