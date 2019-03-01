@@ -6,12 +6,9 @@ const bodyParser = require('body-parser');
 const app    = express();
 const http   = require('http').Server(app);
 const router = require('./routes');
-<<<<<<< HEAD
-const port   = process.env.PORT || 80;
-=======
+
 const port   = process.env.PORT || 1128;
 
->>>>>>> 70ef8c98962a416259560149a8fa4d09665dd72f
 // middleware
 app.use(logger('dev'));
 app.use(bodyParser.json());
