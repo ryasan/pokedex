@@ -1,5 +1,3 @@
 {
-  "jshint.enable": false,
-  "javascript.referencesCodeLens.enabled": false,
-  "eslint.enable": true
+  "jshint.enable": false
 }

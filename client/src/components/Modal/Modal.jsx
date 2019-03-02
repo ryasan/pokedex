@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import Loader from './../Loader/Loader';
+import Icon from './../Icons';
 import client from './../../client';
 import modalHelpers from './ModalHelpers';
 import { actionCreators } from './../../redux/actions';
@@ -31,7 +31,7 @@ class Modal extends Component {
     if (loading) {
       return (
         <div className="modal-wrapper">
-          <Loader />
+          <Icon name="loader" fill="#f00" width="120px" className="loader" />
         </div>
       );
     }

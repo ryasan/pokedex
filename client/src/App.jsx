@@ -8,7 +8,7 @@ import Checkboxes from './components/Checkboxes/Checkboxes';
 import PokemonList from './components/PokemonList/PokemonList';
 import Paginate from './components/Paginate/Paginate';
 import Modal from './components/Modal/Modal';
-import Loader from './components/Loader/Loader';
+import Icon from './components/Icons';
 import client from './client';
 import { actionCreators } from './redux/actions';
 
@@ -51,7 +51,11 @@ class App extends Component {
         <div className="container">
           <Checkboxes fetchPokemon={this.fetchPokemon} />
           <div className="main">
-            {this.props.ui.loading ? <Loader /> : <PokemonList />}
+            {this.props.ui.loading ? (
+              <Icon name="loader" fill="#f00" width="120px" />
+            ) : (
+              <PokemonList />
+            )}
             <Paginate fetchPokemon={this.fetchPokemon} />
           </div>
         </div>

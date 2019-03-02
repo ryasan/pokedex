@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { debounce } from 'lodash';
 
 import Icon from './../Icons';
 import { Input } from './../common';
@@ -9,21 +8,21 @@ import { GITHUB_REPO_URL } from './../../constants';
 import { actionCreators } from './../../redux/actions';
 import './AppBar.scss';
 
-class AppBar extends Component {
-  handleChange = async e => {
-    const { searchTerm, setOffset } = this.props.actions;
+const AppBar = props => {
+  const handleChange = async e => {
+    const { searchTerm, setOffset } = props.actions;
     setOffset({ idx: 0 });
     await searchTerm({ term: e.target.value });
-    this.props.fetchPokemon();
+    props.fetchPokemon();
   };
 
-  render = () => (
+  return (
     <div className="app-bar">
       <Icon name="pokeball" width="50px" className="pokeball-icon" />
       <Input
         type="search"
         placeholder="Search..."
-        onChange={this.handleChange}
+        onChange={handleChange}
         debounceTimeout={300}
       />
       <Icon
@@ -35,7 +34,7 @@ class AppBar extends Component {
       />
     </div>
   );
-}
+};
 
 export default connect(
   null,
