@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { debounce } from 'lodash';
 
 import Icon from './../Icons';
 import { Input } from './../common';
@@ -10,7 +11,9 @@ import './AppBar.scss';
 
 class AppBar extends Component {
   handleChange = async e => {
-    await this.props.actions.searchTerm({ term: e.target.value });
+    const { searchTerm, setOffset } = this.props.actions;
+    setOffset({ idx: 0 });
+    await searchTerm({ term: e.target.value });
     this.props.fetchPokemon();
   };
 
@@ -21,6 +24,7 @@ class AppBar extends Component {
         type="search"
         placeholder="Search..."
         onChange={this.handleChange}
+        debounceTimeout={300}
       />
       <Icon
         name="github"
