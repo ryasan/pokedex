@@ -24,26 +24,26 @@ class App extends Component {
   };
 
   fetchPokemon = () => {
-    this.props.actions.toggleLoading(); // start loader
-    const { search, categories, pagination: { offset } } = this.props;
+    let { search, categories, pagination, actions } = this.props;
+    actions.toggleLoading(); // start loader
+
     const query = {
       search: search,
-      offset: offset,
       limit: ITEMS_PER_PAGE,
-      categories: categories
-        .filter(({ selected }) => selected)
-        .map(({ title }) => title)
+      offset: pagination.offset,
+      categories: categories.filter(({ selected }) => selected).map(({ title }) => title)
     };
 
     client.fetchPokemon(query, this.storePokemon);
   };
 
   storePokemon = ({ pokemon, meta }) => {
-    this.props.actions.storeAllPokemon({ pokemon });
-    this.props.actions.setPageCount({
+    const { storeAllPokemon, setPageCount, toggleLoading } = this.props.actions;
+    storeAllPokemon({ pokemon });
+    setPageCount({
       pageCount: meta.totalCount / meta.limit
     });
-    this.props.actions.toggleLoading(); // end loader
+    toggleLoading(); // end loader
   };
 
   handlePageClick = async ({ selected }) => {
