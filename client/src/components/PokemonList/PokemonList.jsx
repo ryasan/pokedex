@@ -7,7 +7,7 @@ import PokemonListItem from './PokemonListItem';
 class PokemonList extends Component {
   
   render = () => {
-    const { pokemon, onModalToggle } = this.props;
+    const { pokemon, toggleModal } = this.props;
 
     return (
       <div className="pokemon-list" align="center">
@@ -15,7 +15,7 @@ class PokemonList extends Component {
           <PokemonListItem
             key={p.id}
             pokemonItem={p}
-            onModalToggle={onModalToggle}
+            toggleModal={toggleModal}
           />
         ))}
       </div>

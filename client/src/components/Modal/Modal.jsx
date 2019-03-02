@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import Loader from './../Loader/Loader';
 import client from './../../client';
+import modalHelpers from "./ModalHelpers";
 import { roundNumber } from "./../../utils";
 import './Modal.scss';
 
@@ -40,7 +41,7 @@ class Modal extends Component {
 
     return (
       <Fragment>
-        <div className="backdrop" onClick={this.props.onModalToggle} />
+        <div className="backdrop" onClick={this.props.toggleModal} />
         <div className="modal-wrapper">
           <div className="pokemon-details">
             <div className="content col-1">

@@ -47,7 +47,7 @@ module.exports = {
       next: `?limit=${PER_PAGE}&offset=${nextOffSet}`,
       offset: req.query.offset,
       previous: `?limit=${PER_PAGE}&offset=${previousOffSet}`,
-      total_count: pokemon.length
+      totalCount: pokemon.length
     };
 
     res.setHeader('Cache-Control', 'no-cache');

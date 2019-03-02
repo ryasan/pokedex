@@ -8,17 +8,17 @@ import './Pokemon.scss';
 class PokemonListItem extends Component {
   handleClick = selectedPokemon => {
     this.props.actions.selectPokemon({ selectedPokemon });
-    this.props.onModalToggle();
+    this.props.toggleModal();
   };
 
   render = () => {
     const { pokemonItem } = this.props;
 
     return (
-      <a className="card" onClick={() => this.handleClick(pokemonItem.name)}>
+      <div className="card" onClick={() => this.handleClick(pokemonItem.name)}>
         {pokemonItem.name}
         <img src={pokemonItem.imageUrl} alt={`img-${pokemonItem.name}`} />
-      </a>
+      </div>
     );
   };
 }
