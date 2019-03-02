@@ -20,41 +20,39 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    this.props.actions.toggleLoading(); // start loader
     this.fetchPokemon();
-    // this.setState({ loading: true }, this.fetchPokemon);
   };
 
   fetchPokemon = () => {
-    const { offset } = this.props.pagination;
-    const { search } = this.props;
-    const categories = this.props.categories
-      .filter(({ selected }) => selected)
-      .map(({ title }) => title);
-    const query = { limit: ITEMS_PER_PAGE, offset, categories, search };
+    this.props.actions.toggleLoading(); // start loader
+    const { search, categories, pagination: { offset } } = this.props;
+    const query = {
+      search: search,
+      offset: offset,
+      limit: ITEMS_PER_PAGE,
+      categories: categories
+        .filter(({ selected }) => selected)
+        .map(({ title }) => title)
+    };
 
     client.fetchPokemon(query, this.storePokemon);
   };
 
   storePokemon = ({ pokemon, meta }) => {
     this.props.actions.storeAllPokemon({ pokemon });
-    this.props.actions.setPageCount({ pageCount: meta.totalCount / meta.limit });
-    this.props.actions.toggleLoading();
-    // this.setState({
-    //   loading: false
-    // });
+    this.props.actions.setPageCount({
+      pageCount: meta.totalCount / meta.limit
+    });
+    this.props.actions.toggleLoading(); // end loader
   };
 
-  handlePageClick = ({ selected }) => {
-    this.props.actions.setOffset({ offset: selected * ITEMS_PER_PAGE })
-    this.props.actions.toggleLoading(); // end loader
+  handlePageClick = async ({ selected }) => {
+    await this.props.actions.setOffset({ offset: selected * ITEMS_PER_PAGE });
     this.fetchPokemon();
-    // this.setState({ loading: true }, this.fetchPokemon);
   };
 
   handleToggleModal = () => {
     this.props.actions.toggleModal();
-    // this.setState({ modalIsOpen: !this.state.modalIsOpen });
   };
 
   render = () => {
@@ -67,7 +65,11 @@ class App extends Component {
         <div className="container">
           <Checkboxes fetchPokemon={this.fetchPokemon} />
           <div className="main">
-            {loading ? <Loader /> : <PokemonList toggleModal={this.handleToggleModal} />}
+            {loading ? (
+              <Loader />
+            ) : (
+              <PokemonList toggleModal={this.handleToggleModal} />
+            )}
             <Paginate
               pageCount={this.props.pagination.pageCount}
               onPageClick={this.handlePageClick}
