@@ -5,49 +5,53 @@ import { bindActionCreators } from 'redux';
 import { actionCreators } from './../../redux/actions';
 import './Paginate.scss';
 
-class Paginate extends Component {
-  handlePageClick = async (e, idx) => {
+const Paginate = props => {
+  const handlePageClick = async (e, idx) => {
     e.preventDefault();
-    await this.props.actions.setOffset({ idx });
-    this.props.fetchPokemon();
+    await props.setOffset({ idx });
+    props.fetchPokemon();
   };
 
-  render = () => {
-    const { pageCount } = this.props.pagination;
+  const { pageCount, currentPage } = props.pagination;
 
-    return (
-      <nav>
-        <ul className="pagination">
-          {Array(pageCount)
-            .fill()
-            .map((_, i) => (
-              <PaginateItem
-                key={i}
-                idx={i}
-                activeIdx={this.props.pagination.currentPage}
-                onClick={this.handlePageClick}
-              />
-            ))}
-        </ul>
-      </nav>
-    );
-  };
-}
-
-const PaginateItem = ({ idx, activeIdx, onClick }) => {
   return (
-    <li
-      className={activeIdx === idx ? 'page-item active' : 'page-item'}
-      onClick={e => onClick(e, idx)}
-    >
-      <a className="page-link" href="">
-        {idx + 1}
-      </a>
-    </li>
+    <nav>
+      <ul className="pagination">
+        <li
+          className="prev page-item"
+          onClick={e => handlePageClick(e, currentPage - 1)}
+        >
+          prev
+        </li>
+
+        {Array(pageCount)
+          .fill()
+          .map((_, i) => (
+            <li
+              key={i}
+              className={currentPage === i ? 'page-item active' : 'page-item'}
+              onClick={e => handlePageClick(e, i)}
+            >
+              <a className="page-link" href="">
+                {i + 1}
+              </a>
+            </li>
+          ))}
+
+        <li
+          className="next page-item"
+          onClick={e => handlePageClick(e, currentPage + 1)}
+        >
+          next
+        </li>
+      </ul>
+    </nav>
   );
 };
 
 export default connect(
-  state => state,
-  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
+  state => ({ pagination: state.pagination }),
+  dispatch => ({
+    setOffset: bindActionCreators(actionCreators, dispatch).setOffset
+  })
 )(Paginate);
