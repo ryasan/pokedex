@@ -6,25 +6,18 @@ import { actionCreators } from './../../redux/actions';
 import './Paginate.scss';
 
 class Paginate extends Component {
-  state = {
-    activeIdx: 0
-  };
-
-  handlePageClick = async idx => {
+  handlePageClick = async (e,idx) => {
+    e.preventDefault();
     await this.props.actions.setOffset({ idx });
-    await this.setState({ activeIdx: idx });
-
     this.props.fetchPokemon();
   };
 
   generateRange = () => {
     const { pageCount } = this.props.pagination;
     const range = [];
-
     for (let i = 0; i < pageCount; i++) {
       range.push(i);
     }
-
     return range;
   };
 
@@ -36,7 +29,7 @@ class Paginate extends Component {
             <PaginateItem
               key={i}
               idx={i}
-              activeIdx={this.state.activeIdx}
+              activeIdx={this.props.pagination.currentPage}
               onClick={this.handlePageClick}
             />
           ))}
@@ -50,7 +43,7 @@ const PaginateItem = ({ idx, activeIdx, onClick }) => {
   return (
     <li
       className={activeIdx === idx ? 'page-item active' : 'page-item'}
-      onClick={() => onClick(idx)}
+      onClick={(e) => onClick(e, idx)}
     >
       <a className="page-link" href="">
         {idx + 1}
