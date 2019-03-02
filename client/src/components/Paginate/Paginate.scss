@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   .page-item {
+    background: $off_white;
     list-style-type: none;
     text-align: center;
     width: 35px;
@@ -14,16 +15,18 @@
     border-left: none;
     color: $secondary;
     cursor: pointer;
+    transition: background 0.2s;
     &:first-child {
       border-left: 1px solid $light_gray;
-      // border-radius: 5px 0 0 5px;
     }
-    &:last-child {
-      // border-radius: 0 5px 5px 0;
+    &:hover {
+      background: lighten($secondary, 20%);
+      color: white;
     }
     &.active {
+      border: 1px solid $secondary;
       background: $secondary;
-      color: $off_white;
+      color: white;
     }
     .page-link {
       text-decoration: none;
