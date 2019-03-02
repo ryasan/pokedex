@@ -11,7 +11,7 @@ import './AppBar.scss';
 class AppBar extends Component {
   handleChange = async e => {
     await this.props.actions.searchTerm({ term: e.target.value });
-    this.props.fetchPokemon()
+    this.props.fetchPokemon();
   };
 
   render = () => (
