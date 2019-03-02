@@ -1,7 +1,7 @@
 export default {
   fetchPokemon({ limit, offset, categories, search }, success) {
     fetch(
-      `/api/pokemon?limit=${limit}&offset=${offset}&categories=${categories}&searchTerm=${search}`,
+      `/api/pokemon?offset=${offset}&categories=${categories}&searchTerm=${search}`,
       { headers: { Accept: 'application/json' } }
     )
       .then(checkStatus)

@@ -9,9 +9,8 @@ import PokemonList from './components/PokemonList/PokemonList';
 import Paginate from './components/Paginate/Paginate';
 import Modal from './components/Modal/Modal';
 import Loader from './components/Loader/Loader';
-import { actionCreators } from './redux/actions';
 import client from './client';
-import { ITEMS_PER_PAGE } from './constants';
+import { actionCreators } from './redux/actions';
 
 class App extends Component {
   componentDidMount = () => {
@@ -24,7 +23,6 @@ class App extends Component {
 
     const query = {
       search: search,
-      limit: ITEMS_PER_PAGE,
       offset: pagination.offset,
       categories: categories
         .filter(({ selected }) => selected)
@@ -37,9 +35,7 @@ class App extends Component {
   storePokemon = ({ pokemon, meta }) => {
     const { storeAllPokemon, setPageCount, toggleLoading } = this.props.actions;
     storeAllPokemon({ pokemon });
-    setPageCount({
-      pageCount: meta.totalCount / meta.limit
-    });
+    setPageCount({ totalItems: meta.totalCount }); // page count by dividing total pokemon by page limit
     toggleLoading(); // end loader
   };
 

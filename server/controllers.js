@@ -24,11 +24,9 @@ const filtered = (pokemon, categories, searchTerm) => {
 
 module.exports = {
   getPokemon(req, res) {
-    const categories     = req.query.categories.split(',');
-    const searchTerm     = req.query.searchTerm;
-    const offset         = req.query.offset ? parseInt(req.query.offset, 10) : 0;
-    const nextOffSet     = offset + PER_PAGE;
-    const previousOffSet = offset - PER_PAGE < 1 ? 0 : offset - PER_PAGE;
+    const categories = req.query.categories.split(',');
+    const searchTerm = req.query.searchTerm;
+    const offset     = req.query.offset ? parseInt(req.query.offset, 10) : 0;
 
     // map relevant properties from pokemon json file
     let pokemon = JSON.parse(fs.readFileSync(DATA_FILE)).map(p => ({
@@ -44,14 +42,11 @@ module.exports = {
     // info for pagination
     const meta = {
       limit: PER_PAGE,
-      next: `?limit=${PER_PAGE}&offset=${nextOffSet}`,
-      offset: req.query.offset,
-      previous: `?limit=${PER_PAGE}&offset=${previousOffSet}`,
       totalCount: pokemon.length
     };
 
     res.setHeader('Cache-Control', 'no-cache');
-    res.json({ pokemon: getPaginatedItems(pokemon, offset), meta: meta });
+    res.json({ pokemon: getPaginatedItems(pokemon, offset), meta });
   },
   getOnePokemon(req, res) {
     const json = findOne(

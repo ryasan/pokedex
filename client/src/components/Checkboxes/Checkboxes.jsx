@@ -9,7 +9,7 @@ import './Checkboxes.scss';
 class Checkboxes extends Component {
   handleOnChange = async (idx, isChecked) => {
     const { addCategory, removeCategory, setOffset } = this.props.actions;
-    setOffset({ offset: 0 });
+    setOffset({ selected: 0 });
     await (isChecked ? addCategory({ idx }) : removeCategory({ idx }));
     this.props.fetchPokemon();
   };
