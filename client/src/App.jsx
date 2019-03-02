@@ -14,11 +14,6 @@ import client from './client';
 import { ITEMS_PER_PAGE } from './constants';
 
 class App extends Component {
-  state = {
-    loading: false,
-    modalIsOpen: false
-  };
-
   componentDidMount = () => {
     this.fetchPokemon();
   };
