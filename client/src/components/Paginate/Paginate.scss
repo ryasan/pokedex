@@ -16,10 +16,10 @@
     cursor: pointer;
     &:first-child {
       border-left: 1px solid $light_gray;
-      border-radius: 5px 0 0 5px;
+      // border-radius: 5px 0 0 5px;
     }
     &:last-child {
-      border-radius: 0 5px 5px 0;
+      // border-radius: 0 5px 5px 0;
     }
     &.active {
       background: $secondary;

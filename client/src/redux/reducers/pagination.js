@@ -11,7 +11,6 @@ export default (state = defaultState, action) => {
   const { type, payload } = action;
   switch (type) {
     case SET_OFFSET:
-    console.log(payload.idx);
       return {
         ...state,
         currentPage: payload.idx,
