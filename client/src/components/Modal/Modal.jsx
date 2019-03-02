@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Loader from './../Loader/Loader';
 import client from './../../client';
-import modalHelpers from "./ModalHelpers";
-import { roundNumber } from "./../../utils";
+import modalHelpers from './ModalHelpers';
+import { actionCreators } from './../../redux/actions';
+import { roundNumber } from './../../utils';
 import './Modal.scss';
 
 class Modal extends Component {
@@ -41,7 +43,7 @@ class Modal extends Component {
 
     return (
       <Fragment>
-        <div className="backdrop" onClick={this.props.toggleModal} />
+        <div className="backdrop" onClick={this.props.actions.toggleModal} />
         <div className="modal-wrapper">
           <div className="pokemon-details">
             <div className="content col-1">
@@ -68,12 +70,8 @@ class Modal extends Component {
                       .map(type => type.toLowerCase())
                       .join(', ')}
                   </li>
-                  <li>
-                    height: {roundNumber(pokemonDetails.height)} m
-                  </li>
-                  <li>
-                    weight: {roundNumber(pokemonDetails.weight)} kg
-                  </li>
+                  <li>height: {roundNumber(pokemonDetails.height)} m</li>
+                  <li>weight: {roundNumber(pokemonDetails.weight)} kg</li>
                 </ul>
               </div>
             </div>
@@ -86,5 +84,5 @@ class Modal extends Component {
 
 export default connect(
   state => state.pokemon,
-  null
+  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
 )(Modal);

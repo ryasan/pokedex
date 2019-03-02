@@ -7,8 +7,9 @@ import './Pokemon.scss';
 
 class PokemonListItem extends Component {
   handleClick = selectedPokemon => {
-    this.props.actions.selectPokemon({ selectedPokemon });
-    this.props.toggleModal();
+    const { selectPokemon, toggleModal } = this.props.actions;
+    selectPokemon({ selectedPokemon });
+    toggleModal();
   };
 
   render = () => {
