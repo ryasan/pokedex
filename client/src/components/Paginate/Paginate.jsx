@@ -11,8 +11,27 @@ class Paginate extends Component {
   };
 
   handlePageClick = async idx => {
+    this.setState({ activeIdx: idx });
     await this.props.actions.setOffset({ idx });
     this.props.fetchPokemon();
+  };
+
+  renderPageItems = () => {
+    const { pageCount } = this.props.pagination;
+    const pageItems = [];
+
+    for (let i = 0; i < pageCount; i++) {
+      pageItems.push(
+        <PaginateItem
+          key={i}
+          idx={i}
+          activeIdx={this.state.activeIdx}
+          onClick={this.handlePageClick}
+        />
+      );
+    }
+
+    return pageItems;
   };
 
   render = () => {
@@ -20,18 +39,7 @@ class Paginate extends Component {
 
     return (
       <nav>
-        <ul className="pagination">
-          {Array(pageCount)
-            .fill()
-            .map((_, i) => (
-              <PaginateItem
-                key={i}
-                idx={i}
-                activeIdx={this.state.activeIdx}
-                onClick={this.handlePageClick}
-              />
-            ))}
-        </ul>
+        <ul className="pagination">{this.renderPageItems()}</ul>
       </nav>
     );
   };
@@ -41,7 +49,7 @@ const PaginateItem = ({ idx, activeIdx, onClick }) => {
   return (
     <li
       className={activeIdx === idx ? 'page-item active' : 'page-item'}
-      onClick={onClick}
+      onClick={() => onClick(idx)}
     >
       <a className="page-link" href="">
         {idx + 1}
