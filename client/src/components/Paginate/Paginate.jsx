@@ -11,35 +11,36 @@ class Paginate extends Component {
   };
 
   handlePageClick = async idx => {
-    this.setState({ activeIdx: idx });
     await this.props.actions.setOffset({ idx });
+    await this.setState({ activeIdx: idx });
+
     this.props.fetchPokemon();
   };
 
-  renderPageItems = () => {
+  generateRange = () => {
     const { pageCount } = this.props.pagination;
-    const pageItems = [];
+    const range = [];
 
     for (let i = 0; i < pageCount; i++) {
-      pageItems.push(
-        <PaginateItem
-          key={i}
-          idx={i}
-          activeIdx={this.state.activeIdx}
-          onClick={this.handlePageClick}
-        />
-      );
+      range.push(i);
     }
 
-    return pageItems;
+    return range;
   };
 
   render = () => {
-    const { pageCount } = this.props.pagination;
-
     return (
       <nav>
-        <ul className="pagination">{this.renderPageItems()}</ul>
+        <ul className="pagination">
+          {this.generateRange().map(i => (
+            <PaginateItem
+              key={i}
+              idx={i}
+              activeIdx={this.state.activeIdx}
+              onClick={this.handlePageClick}
+            />
+          ))}
+        </ul>
       </nav>
     );
   };
