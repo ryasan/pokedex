@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import { actionCreators } from './../../redux/actions';
 import './Paginate.scss';
@@ -60,6 +61,12 @@ const Paginate = props => {
       </ul>
     </nav>
   );
+};
+
+Paginate.propTypes = {
+  setOffset: PropTypes.func,
+  fetchPokemon: PropTypes.func,
+  pagination: PropTypes.object
 };
 
 export default connect(

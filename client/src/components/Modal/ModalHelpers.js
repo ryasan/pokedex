@@ -1,7 +1,7 @@
 import React from 'react';
 
 const filterShinySprites = url => {
-  let regex = /\/shiny\//;
+  const regex = /\/shiny\//;
   return url && !regex.test(url);
 };
 

@@ -18,7 +18,7 @@ class App extends Component {
   };
 
   fetchPokemon = () => {
-    let { search, categories, pagination, actions } = this.props;
+    const { search, categories, pagination, actions } = this.props;
     actions.toggleLoading(); // start loader
 
     const query = {
@@ -67,7 +67,11 @@ class App extends Component {
 }
 
 App.propTypes = {
-  categories: PropTypes.array
+  categories: PropTypes.array,
+  search: PropTypes.string,
+  pagination: PropTypes.object,
+  actions: PropTypes.object,
+  ui: PropTypes.object
 };
 
 export default connect(

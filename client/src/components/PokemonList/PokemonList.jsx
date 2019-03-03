@@ -26,7 +26,8 @@ const PokemonList = props => {
 };
 
 PokemonList.propTypes = {
-  pokemon: PropTypes.array
+  pokemon: PropTypes.array,
+  actions: PropTypes.object
 };
 
 export default connect(

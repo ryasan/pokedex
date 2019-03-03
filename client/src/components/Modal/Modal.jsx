@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import Icon from './../Icons';
 import client from './../../client';
@@ -43,7 +44,7 @@ class Modal extends Component {
 
     return (
       <Fragment>
-        <div className="backdrop" onClick={this.props.actions.toggleModal} />
+        <div className="backdrop" onClick={this.props.toggleModal} />
         <div className="modal-wrapper">
           <div className="pokemon-details">
             <div className="content col-1">
@@ -82,7 +83,14 @@ class Modal extends Component {
   };
 }
 
+Modal.propTypes = {
+  selectedPokemon: PropTypes.string,
+  toggleModal: PropTypes.object
+};
+
 export default connect(
   state => state.pokemon,
-  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
+  dispatch => ({
+    toggleModal: bindActionCreators(actionCreators.toggleModal, dispatch)
+  })
 )(Modal);
