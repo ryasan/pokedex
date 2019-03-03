@@ -17,16 +17,23 @@
     padding: 0 10px;
     cursor: pointer;
     transition: background 0.2s;
+    &.active {
+      border: 1px solid $secondary;
+      background: $secondary;
+      color: white;
+    }
+    &.page-button {
+      &:disabled {
+        cursor: not-allowed;
+        color: $disabled_text;
+        background: $off_white;
+      }
+    }
     &:first-child {
       border-left: 1px solid $light_gray;
     }
     &:hover {
       background: lighten($secondary, 20%);
-      color: white;
-    }
-    &.active {
-      border: 1px solid $secondary;
-      background: $secondary;
       color: white;
     }
     .page-link {

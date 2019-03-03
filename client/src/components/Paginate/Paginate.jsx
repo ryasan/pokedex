@@ -17,12 +17,12 @@ const Paginate = props => {
   return (
     <nav>
       <ul className="pagination">
-        <li
-          className="prev page-item"
-          onClick={e => handlePageClick(e, currentPage - 1)}
-        >
-          prev
-        </li>
+        <button
+          onClick={e => handlePageClick(e, Math.max(currentPage - 1, 0))}
+          disabled={currentPage === 0}
+          className="page-item page-button">
+          <a className="page-link">prev</a>
+        </button>
 
         {Array(pageCount)
           .fill()
@@ -30,20 +30,21 @@ const Paginate = props => {
             <li
               key={i}
               className={currentPage === i ? 'page-item active' : 'page-item'}
-              onClick={e => handlePageClick(e, i)}
-            >
+              onClick={e => handlePageClick(e, i)}>
               <a className="page-link" href="">
                 {i + 1}
               </a>
             </li>
           ))}
 
-        <li
-          className="next page-item"
-          onClick={e => handlePageClick(e, currentPage + 1)}
-        >
-          next
-        </li>
+        <button
+          onClick={e =>
+            handlePageClick(e, Math.min(currentPage + 1, pageCount))
+          }
+          disabled={currentPage === pageCount - 1}
+          className="page-item page-button">
+          <a className="page-link">next</a>
+        </button>
       </ul>
     </nav>
   );

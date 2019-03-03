@@ -18,8 +18,7 @@ const LoaderSVG = ({
     className={className}
     x="0px"
     y="0px"
-    xmlns="http://www.w3.org/2000/svg"
-  >
+    xmlns="http://www.w3.org/2000/svg">
     <rect x="0" y="13" width="4" height="5">
       <animate
         attributeName="height"

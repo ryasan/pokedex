@@ -1,22 +1,28 @@
 @import './../../_variables.scss';
 
 .pokemon-list {
-  margin-top: 1%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   .card {
+    list-style-type: none;
     color: $normal_text;
     background: $off_white;
-    position: relative;
-    margin: 1rem 0.6rem;
-    display: inline-block;
+    margin: 0.6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: $width_normal;
-    height: auto;
-    padding: 2% 0;
     height: calc(1.4 * #{$width_normal});
     border-radius: 0.5rem;
     border: $light_gray 1px solid;
     box-shadow: 3px 4px 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: transform 0.3s;
+    -webkit-transition: transform 0.3s;
+    -moz-transition: transform 0.3s;
+    -o-transition: transform 0.3s;
     img {
       display: block;
       position: relative;

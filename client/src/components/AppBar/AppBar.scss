@@ -33,6 +33,9 @@
     border-width: 2px;
     border-color: $secondary;
     transition: border 0.25s ease, width 0.125s ease 0.125s;
+    -webkit-transition: border 0.25s ease, width 0.125s ease 0.125s;
+    -moz-transition: border 0.25s ease, width 0.125s ease 0.125s;
+    -o-transition: border 0.25s ease, width 0.125s ease 0.125s;
     &:focus {
       width: 20%;
     }
