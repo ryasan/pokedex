@@ -1,5 +1,6 @@
 import React from 'react';
 import { DebounceInput } from 'react-debounce-input';
+import PropTypes from 'prop-types';
 
 const Input = ({
   id = '',
@@ -22,5 +23,16 @@ const Input = ({
     placeholder={placeholder}
   />
 );
+
+Input.propTypes = {
+  id: PropTypes.string,
+  type: PropTypes.string,
+  style: PropTypes.object,
+  className: PropTypes.string,
+  placeholder: PropTypes.string,
+  minLength: PropTypes.number,
+  debounceTimeout: PropTypes.number,
+  onChange: PropTypes.func
+};
 
 export { Input };

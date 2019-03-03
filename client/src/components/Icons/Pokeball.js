@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const PokeballSVG = ({
   style = {},
@@ -44,7 +45,7 @@ const PokeballSVG = ({
         fill="#fff"
         d="M447.178,357.277c-49.904,0-90.36,40.456-90.36,90.362
 		c0,49.904,40.456,90.361,90.36,90.361c49.906,0,90.361-40.457,90.361-90.361C537.539,397.733,497.084,357.277,447.178,357.277z
-		 M447.179,492.218c-24.621,0-44.579-19.958-44.579-44.578c0-24.621,19.958-44.579,44.579-44.579
+		M447.179,492.218c-24.621,0-44.579-19.958-44.579-44.578c0-24.621,19.958-44.579,44.579-44.579
 		c24.62,0,44.578,19.958,44.578,44.579C491.757,472.26,471.799,492.218,447.179,492.218z"
       />
     </g>
@@ -58,5 +59,14 @@ const PokeballSVG = ({
     />
   </svg>
 );
+
+PokeballSVG.propTypes = {
+  style: PropTypes.object,
+  width: PropTypes.string,
+  viewBox: PropTypes.string,
+  className: PropTypes.string,
+  fill: PropTypes.string,
+  onClick: PropTypes.func
+};
 
 export default PokeballSVG;

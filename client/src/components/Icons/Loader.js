@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const LoaderSVG = ({
   style = { margin: '30% auto', width: '100%' },
@@ -75,5 +76,14 @@ const LoaderSVG = ({
     </rect>
   </svg>
 );
+
+LoaderSVG.propTypes = {
+  style: PropTypes.object,
+  width: PropTypes.string,
+  viewBox: PropTypes.string,
+  className: PropTypes.string,
+  fill: PropTypes.string,
+  onClick: PropTypes.func
+};
 
 export default LoaderSVG;
