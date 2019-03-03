@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Input } from './../common';
 
@@ -20,6 +21,15 @@ const CheckboxItem = props => {
       <label htmlFor={props.title}>{props.title}</label>
     </div>
   );
+};
+
+CheckboxItem.propTypes = {
+  addCategory: PropTypes.func,
+  removeCategory: PropTypes.func,
+  setOffset: PropTypes.func,
+  fetchPokemon: PropTypes.func,
+  title: PropTypes.string,
+  idx: PropTypes.number
 };
 
 export default CheckboxItem;

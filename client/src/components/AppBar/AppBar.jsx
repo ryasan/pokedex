@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import CheckboxItem from './../Checkboxes/CheckboxItem';
+import PropTypes from 'prop-types';
 
 import Icon from './../Icons';
 import { Input } from './../common';
@@ -35,6 +35,11 @@ const AppBar = props => {
       />
     </div>
   );
+};
+
+AppBar.propTypes = {
+  actions: PropTypes.object.isRequired,
+  fetchPokemon: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = dispatch => ({

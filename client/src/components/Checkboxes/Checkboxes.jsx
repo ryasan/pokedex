@@ -1,19 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import CheckboxItem from './CheckboxItem';
 import { actionCreators } from './../../redux/actions';
 import './Checkboxes.scss';
 
 const Checkboxes = props => {
-  const handleOnChange = async (idx, isChecked) => {
-    const { addCategory, removeCategory, setOffset } = props.actions;
-    setOffset({ idx: 0 });
-    await (isChecked ? addCategory({ idx }) : removeCategory({ idx }));
-    props.fetchPokemon();
-  };
-
   return (
     <div className="checkboxes">
       <h3>Category</h3>
@@ -28,6 +22,12 @@ const Checkboxes = props => {
       ))}
     </div>
   );
+};
+
+Checkboxes.propTypes = {
+  categories: PropTypes.array,
+  fetchPokemon: PropTypes.func,
+  actions: PropTypes.object
 };
 
 const mapDispatchToProps = dispatch => ({
