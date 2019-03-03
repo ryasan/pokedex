@@ -29,6 +29,11 @@
         background: $off_white;
       }
     }
+    &.page-num {
+      @media only screen and (max-width: 720px) {
+        display: none;
+      }
+    }
     &:first-child {
       border-left: 1px solid $light_gray;
     }

@@ -1,13 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
 import { Input } from './../common';
-import { actionCreators } from './../../redux/actions';
 
 const CheckboxItem = props => {
   const handleOnChange = async (idx, isChecked) => {
-    const { addCategory, removeCategory, setOffset } = props.actions;
+    const { addCategory, removeCategory, setOffset } = props;
     setOffset({ idx: 0 });
     await (isChecked ? addCategory({ idx }) : removeCategory({ idx }));
     props.fetchPokemon();
@@ -25,7 +22,4 @@ const CheckboxItem = props => {
   );
 };
 
-export default connect(
-  null,
-  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
-)(CheckboxItem);
+export default CheckboxItem;

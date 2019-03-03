@@ -1,6 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import CheckboxItem from './../Checkboxes/CheckboxItem';
 
 import Icon from './../Icons';
 import { Input } from './../common';
@@ -36,7 +37,17 @@ const AppBar = props => {
   );
 };
 
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(
+    {
+      searchTerm: actionCreators.searchTerm,
+      setOffset: actionCreators.setOffset
+    },
+    dispatch
+  )
+});
+
 export default connect(
   null,
-  dispatch => ({ actions: bindActionCreators(actionCreators, dispatch) })
+  mapDispatchToProps
 )(AppBar);

@@ -14,6 +14,31 @@ const Paginate = props => {
 
   const { pageCount, currentPage } = props.pagination;
 
+  const renderPageNums = () => {
+    const pageNums = Array(pageCount)
+      .fill()
+      .map((_, i) => {
+        const className = [
+          'page-item',
+          'page-num',
+          currentPage === i ? 'active' : ''
+        ].join(' ');
+
+        return (
+          <li
+            key={i}
+            className={className}
+            onClick={e => handlePageClick(e, i)}>
+            <a className="page-link" href="">
+              {i + 1}
+            </a>
+          </li>
+        );
+      });
+
+    return pageNums;
+  };
+
   return (
     <nav>
       <ul className="pagination">
@@ -23,20 +48,7 @@ const Paginate = props => {
           className="page-item page-button">
           <a className="page-link">prev</a>
         </button>
-
-        {Array(pageCount)
-          .fill()
-          .map((_, i) => (
-            <li
-              key={i}
-              className={currentPage === i ? 'page-item active' : 'page-item'}
-              onClick={e => handlePageClick(e, i)}>
-              <a className="page-link" href="">
-                {i + 1}
-              </a>
-            </li>
-          ))}
-
+        {renderPageNums()}
         <button
           onClick={e =>
             handlePageClick(e, Math.min(currentPage + 1, pageCount))
@@ -53,6 +65,6 @@ const Paginate = props => {
 export default connect(
   state => ({ pagination: state.pagination }),
   dispatch => ({
-    setOffset: bindActionCreators(actionCreators, dispatch).setOffset
+    setOffset: bindActionCreators(actionCreators.setOffset, dispatch)
   })
 )(Paginate);

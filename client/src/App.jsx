@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -54,9 +54,11 @@ class App extends Component {
             {this.props.ui.loading ? (
               <Icon name="loader" fill="#f00" width="120px" />
             ) : (
-              <PokemonList />
+              <Fragment>
+                <PokemonList />
+                <Paginate fetchPokemon={this.fetchPokemon} />
+              </Fragment>
             )}
-            <Paginate fetchPokemon={this.fetchPokemon} />
           </div>
         </div>
       </div>
