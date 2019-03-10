@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import Icon from './../Icons';
-import modalHelpers from './ModalHelpers';
+import { filterShinySprites } from './ModalHelpers';
 import { actionCreators } from './../../redux/actions';
 import { roundNumber } from './../../utils';
 import './Modal.scss';
@@ -14,22 +13,22 @@ class Modal extends Component {
     loading: true
   };
 
-  componentDidMount = () => {
-    this.setState({ loading: false });
+  renderSprites = (sprites, name) => {
+    return Object.values(sprites)
+      .filter(filterShinySprites)
+      .map((sprite, i) => (
+        <img
+          className={`sprite sprite-${i + 1}`}
+          key={i}
+          src={sprite}
+          alt={`${name}-${i + 1}`}
+        />
+      ));
   };
 
   render = () => {
-    if (this.state.loading) {
-      return (
-        <div className="modal-wrapper">
-          <Icon name="loader" fill="#f00" width="120px" className="loader" />
-        </div>
-      );
-    }
-
     const { selectedPokemon } = this.props;
-
-    const sprites = modalHelpers.filterSprites(
+    const sprites = this.renderSprites(
       selectedPokemon.sprites,
       selectedPokemon.name
     );
@@ -38,38 +37,30 @@ class Modal extends Component {
       <Fragment>
         <div className="backdrop" onClick={this.props.toggleModal} />
         <div className="modal-wrapper">
-          <div className="pokemon-details">
-            <div className="content col-1">
-              <div className="title">
-                <h2>
-                  #{selectedPokemon.id} {selectedPokemon.name}
-                </h2>
-              </div>
-              <div className="image-grid">
-                <img
-                  className="main-image"
-                  src={selectedPokemon.imageUrl}
-                  alt={`img-${selectedPokemon.name}`}
-                />
-                {sprites}
-              </div>
-            </div>
-            <div className="content col-2">
-              <div className="meta">
-                <ul>
-                  <li>
-                    types:{' '}
-                    {selectedPokemon.types
-                      .map(type => type.toLowerCase())
-                      .join(', ')}
-                  </li>
-                  <li>height: {roundNumber(selectedPokemon.height)} m</li>
-                  <li>weight: {roundNumber(selectedPokemon.weight)} kg</li>
-                </ul>
-              </div>
+          <h2 className="top">
+            #{selectedPokemon.id} {selectedPokemon.name}
+          </h2>
+          <div className="middle-left">
+            <div className="image-grid">
+              <img
+                className="main-image"
+                src={selectedPokemon.imageUrl}
+                alt={`img-${selectedPokemon.name}`}
+              />
+              {sprites}
             </div>
           </div>
-          <button>close</button>
+          <ul className="middle-right">
+            <li>
+              types:{' '}
+              {selectedPokemon.types.map(type => type.toLowerCase()).join(', ')}
+            </li>
+            <li>height: {roundNumber(selectedPokemon.height)} m</li>
+            <li>weight: {roundNumber(selectedPokemon.weight)} kg</li>
+          </ul>
+          <div className="bottom">
+            <button>close</button>
+          </div>
         </div>
       </Fragment>
     );
