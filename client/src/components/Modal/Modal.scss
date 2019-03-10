@@ -14,20 +14,20 @@
   width: 600px;
   height: 400px;
   position: absolute;
-  top: 42%;
+  top: 45%;
   left: 50%;
-  padding: 1% 2% 2% 2%;
+  padding: 1%;
   margin-top: -150px;
   margin-left: -275px;
   z-index: 9999;
-  border-radius: 0.5rem;
+  border-radius: 5px;
   background-color: white;
   display: grid;
+  grid-template-rows: 1fr 8fr 1fr;
   grid-template-areas:
     'top top'
     'middle-left middle-right'
-    'middle-left middle-right'
-    'middle-left middle-right';
+    'bottom bottom';
 
   .top {
     grid-area: top;
@@ -37,9 +37,11 @@
 
   .middle-left {
     grid-area: middle-left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .image-grid {
       display: grid;
-      grid-template-columns: 5fr 1fr 1fr;
       grid-template-areas:
         'main-image main-image sprite-1'
         'main-image main-image sprite-2'
@@ -72,15 +74,32 @@
   .middle-right {
     grid-area: middle-right;
     list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     li {
       color: $normal_text;
+      padding-bottom: 35px;
     }
   }
 
   .bottom {
     grid-area: bottom;
+    padding-right: 5%;
     button {
+      background: $primary;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      padding: 0.5rem 1rem;
       float: right;
+      cursor: pointer;
+      outline: none;
+      &:hover {
+        background: darken($primary, 10%);
+      }
     }
   }
 }

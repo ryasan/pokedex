@@ -59,7 +59,7 @@ class Modal extends Component {
             <li>weight: {roundNumber(selectedPokemon.weight)} kg</li>
           </ul>
           <div className="bottom">
-            <button>close</button>
+            <button onClick={this.props.toggleModal}>close</button>
           </div>
         </div>
       </Fragment>
