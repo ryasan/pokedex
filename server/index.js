@@ -7,7 +7,7 @@ const app    = express();
 const http   = require('http').Server(app);
 const router = require('./routes');
 
-const port   = process.env.PORT || 1128;
+const port = process.env.NODE_ENV === 'production' ? 80 : 1128;
 
 // middleware
 app.use(logger('dev'));
