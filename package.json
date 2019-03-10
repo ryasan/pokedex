@@ -4,7 +4,7 @@
   "description": "pokemon lookup app",
   "main": "index.js",
   "scripts": {
-    "start:all": "concurrently \"yarn server\" \"yarn client\"",
+    "start": "concurrently \"yarn server\" \"yarn client\"",
     "server": "nodemon ./server -e js",
     "client": "webpack-dev-server --inline --hot",
     "build": "webpack --mode production"

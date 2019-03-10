@@ -4,13 +4,16 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { actionCreators } from './../../redux/actions';
+import client from './../../client';
 import './Pokemon.scss';
 
 const PokemonList = props => {
-  const handleClick = selectedPokemon => {
+  const handleClick = name => {
     const { selectPokemon, toggleModal } = props.actions;
-    selectPokemon({ selectedPokemon });
-    toggleModal();
+    client.fetchPokemonDetails(name, (selectedPokemon) => {
+      selectPokemon({ selectedPokemon });
+      toggleModal();
+    });
   };
 
   return (

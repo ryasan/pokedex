@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import Icon from './../Icons';
-import client from './../../client';
 import modalHelpers from './ModalHelpers';
 import { actionCreators } from './../../redux/actions';
 import { roundNumber } from './../../utils';
@@ -12,24 +11,15 @@ import './Modal.scss';
 
 class Modal extends Component {
   state = {
-    pokemonDetails: {},
-    loading: false
+    loading: true
   };
 
-  componentWillMount = () => {
-    this.setState(
-      { loading: true },
-      client.fetchPokemonDetails(this.props.selectedPokemon, this.getDetails)
-    );
-  };
-
-  getDetails = data => {
-    this.setState({ pokemonDetails: data, loading: false });
+  componentDidMount = () => {
+    this.setState({ loading: false });
   };
 
   render = () => {
-    const { loading, pokemonDetails } = this.state;
-    if (loading) {
+    if (this.state.loading) {
       return (
         <div className="modal-wrapper">
           <Icon name="loader" fill="#f00" width="120px" className="loader" />
@@ -37,9 +27,11 @@ class Modal extends Component {
       );
     }
 
+    const { selectedPokemon } = this.props;
+
     const sprites = modalHelpers.filterSprites(
-      pokemonDetails.sprites,
-      pokemonDetails.name
+      selectedPokemon.sprites,
+      selectedPokemon.name
     );
 
     return (
@@ -50,14 +42,14 @@ class Modal extends Component {
             <div className="content col-1">
               <div className="title">
                 <h2>
-                  #{pokemonDetails.id} {pokemonDetails.name}
+                  #{selectedPokemon.id} {selectedPokemon.name}
                 </h2>
               </div>
               <div className="image-grid">
                 <img
                   className="main-image"
-                  src={pokemonDetails.imageUrl}
-                  alt={`img-${pokemonDetails.name}`}
+                  src={selectedPokemon.imageUrl}
+                  alt={`img-${selectedPokemon.name}`}
                 />
                 {sprites}
               </div>
@@ -67,16 +59,17 @@ class Modal extends Component {
                 <ul>
                   <li>
                     types:{' '}
-                    {pokemonDetails.types
+                    {selectedPokemon.types
                       .map(type => type.toLowerCase())
                       .join(', ')}
                   </li>
-                  <li>height: {roundNumber(pokemonDetails.height)} m</li>
-                  <li>weight: {roundNumber(pokemonDetails.weight)} kg</li>
+                  <li>height: {roundNumber(selectedPokemon.height)} m</li>
+                  <li>weight: {roundNumber(selectedPokemon.weight)} kg</li>
                 </ul>
               </div>
             </div>
           </div>
+          <button>close</button>
         </div>
       </Fragment>
     );
@@ -84,8 +77,8 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
-  selectedPokemon: PropTypes.string,
-  toggleModal: PropTypes.object
+  selectedPokemon: PropTypes.object,
+  toggleModal: PropTypes.func
 };
 
 export default connect(
