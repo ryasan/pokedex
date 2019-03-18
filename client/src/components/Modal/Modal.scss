@@ -12,7 +12,7 @@
 
 .modal-wrapper {
   width: 600px;
-  height: 400px;
+  height: 450px;
   position: absolute;
   top: 45%;
   left: 50%;
@@ -46,9 +46,6 @@
         'main-image main-image sprite-1'
         'main-image main-image sprite-2'
         'sprite-3 sprite-4 .';
-      img {
-        display: block;
-      }
       .main-image {
         grid-area: main-image;
         max-width: 100%;

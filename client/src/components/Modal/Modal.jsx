@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
-import { filterShinySprites } from './ModalHelpers';
 import { actionCreators } from './../../redux/actions';
 import { roundNumber } from './../../utils';
 import './Modal.scss';
@@ -14,16 +13,14 @@ class Modal extends Component {
   };
 
   renderSprites = (sprites, name) => {
-    return Object.values(sprites)
-      .filter(filterShinySprites)
-      .map((sprite, i) => (
-        <img
-          className={`sprite sprite-${i + 1}`}
-          key={i}
-          src={sprite}
-          alt={`${name}-${i + 1}`}
-        />
-      ));
+    return [sprites.front_default, sprites.back_default].map((sprite, i) => (
+      <img
+        className={`sprite sprite-${i + 1}`}
+        key={i}
+        src={sprite}
+        alt={`${name}-${i + 1}`}
+      />
+    ));
   };
 
   render = () => {
@@ -41,14 +38,14 @@ class Modal extends Component {
             #{selectedPokemon.id} {selectedPokemon.name}
           </h2>
           <div className="middle-left">
-            <div className="image-grid">
+            <figure className="image-grid">
               <img
                 className="main-image"
                 src={selectedPokemon.imageUrl}
                 alt={`img-${selectedPokemon.name}`}
               />
               {sprites}
-            </div>
+            </figure>
           </div>
           <ul className="middle-right">
             <li>
