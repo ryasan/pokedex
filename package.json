@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"yarn server\" \"yarn client\"",
     "server": "nodemon ./server -e js",
-    "client": "webpack-dev-server --inline --hot",
+    "client": "webpack-dev-server --inline --hot --open",
     "build": "webpack --mode production"
   },
   "repository": {
