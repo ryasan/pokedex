@@ -1,5 +1,4 @@
 import React from 'react';
-import { DebounceInput } from 'react-debounce-input';
 import PropTypes from 'prop-types';
 
 const Input = ({
@@ -8,18 +7,14 @@ const Input = ({
   style = {},
   className = '',
   placeholder = '',
-  minLength = 0,
-  debounceTimeout = 0,
   onChange = () => {}
 }) => (
-  <DebounceInput
+  <input
     id={id}
     type={type}
     style={style}
     className={className}
     onChange={onChange}
-    minLength={minLength}
-    debounceTimeout={debounceTimeout}
     placeholder={placeholder}
   />
 );

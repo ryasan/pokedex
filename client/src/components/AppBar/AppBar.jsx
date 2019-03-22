@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { debounce } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 
 import Icon from './../Icons';
 import { Input } from './../common';
@@ -10,12 +11,12 @@ import { actionCreators } from './../../redux/actions';
 import './AppBar.scss';
 
 const AppBar = props => {
-  const handleChange = async e => {
+  const handleChange = debounce(async e => {
     const { searchTerm, setOffset } = props.actions;
     setOffset({ idx: 0 });
     await searchTerm({ term: e.target.value });
     props.fetchPokemon();
-  };
+  }, 350);
 
   return (
     <div className="app-bar">
@@ -23,8 +24,10 @@ const AppBar = props => {
       <Input
         type="search"
         placeholder="Search..."
-        onChange={handleChange}
-        debounceTimeout={300}
+        onChange={e => {
+          e.persist();
+          handleChange(e);
+        }}
       />
       <Icon
         name="github"
